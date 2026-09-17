@@ -1,0 +1,111 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    @apply bg-white text-navy antialiased;
+  }
+  ::selection {
+    @apply bg-teal-400/30;
+  }
+}
+
+@layer components {
+  .container-x {
+    @apply mx-auto w-full max-w-container px-5 sm:px-7 lg:px-8;
+  }
+
+  .eyebrow {
+    @apply text-[11px] font-extrabold uppercase tracking-[0.22em] text-teal-600;
+  }
+
+  .h1 {
+    @apply text-[2.15rem] font-extrabold leading-[1.08] tracking-[-0.025em] sm:text-5xl lg:text-[3.85rem];
+  }
+  .h2 {
+    @apply text-[1.75rem] font-extrabold leading-[1.12] tracking-[-0.022em] sm:text-4xl lg:text-[2.7rem];
+  }
+  .h3 {
+    @apply text-xl font-extrabold leading-snug tracking-[-0.015em] sm:text-2xl;
+  }
+  .lede {
+    @apply text-base leading-relaxed text-navy/65 sm:text-lg;
+  }
+
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 rounded-full px-6 py-3 text-sm font-bold
+           transition-all duration-300 focus:outline-none focus-visible:ring-2
+           focus-visible:ring-teal-400 focus-visible:ring-offset-2;
+  }
+  .btn-primary {
+    @apply btn bg-navy text-white hover:bg-navy-700 hover:shadow-lift active:scale-[0.98];
+  }
+  .btn-teal {
+    @apply btn bg-teal-600 text-white hover:bg-teal-500 hover:shadow-lift active:scale-[0.98];
+  }
+  .btn-ghost {
+    @apply btn border border-line bg-white text-navy hover:border-navy/25 hover:bg-mist active:scale-[0.98];
+  }
+  .btn-ghost-dark {
+    @apply btn border border-white/20 bg-white/5 text-white hover:border-white/40 hover:bg-white/10 active:scale-[0.98];
+  }
+
+  .card {
+    @apply rounded-2xl border border-line bg-white p-6 shadow-soft transition-all duration-400
+           hover:-translate-y-1 hover:border-teal-400/45 hover:shadow-lift sm:p-7;
+  }
+
+  .chip {
+    @apply inline-flex items-center gap-2 rounded-full border border-line bg-mist px-3.5 py-1.5
+           text-xs font-bold text-navy/70;
+  }
+
+  .link-underline {
+    @apply relative after:absolute after:-bottom-0.5 after:left-0 after:h-px after:w-0
+           after:bg-current after:transition-all after:duration-300 hover:after:w-full;
+  }
+}
+
+@layer utilities {
+  .text-gradient {
+    @apply bg-gradient-to-r from-teal-600 via-teal-500 to-teal-400 bg-clip-text text-transparent;
+  }
+  .surface-dark {
+    background:
+      radial-gradient(90rem 40rem at 15% -10%, rgba(53, 214, 192, 0.16), transparent 60%),
+      radial-gradient(70rem 36rem at 95% 10%, rgba(27, 143, 138, 0.2), transparent 62%),
+      linear-gradient(155deg, #0b2436 0%, #103a4e 55%, #12586a 100%);
+  }
+  .grid-lines {
+    background-image:
+      linear-gradient(to right, rgba(11, 36, 54, 0.05) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(11, 36, 54, 0.05) 1px, transparent 1px);
+    background-size: 56px 56px;
+  }
+  .mask-fade-x {
+    -webkit-mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
+    mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Safety net: if JavaScript is disabled, scroll-reveal elements must still be visible. */
+.no-js [style*='opacity: 0'],
+.no-js [style*='opacity:0'] {
+  opacity: 1 !important;
+  transform: none !important;
+}
