@@ -3,7 +3,7 @@ import PageHeader from '@/components/PageHeader';
 import Icon from '@/components/Icon';
 import Reveal, { Stagger, StaggerItem } from '@/components/Reveal';
 import CTA from '@/components/CTA';
-import { INDUSTRIES } from '@/lib/content';
+import { INDUSTRIES, OG_IMAGE } from '@/lib/content';
 
 const OG_TITLE = 'Industries | Fenbrix';
 const OG_DESCRIPTION =
@@ -13,8 +13,8 @@ export const metadata = {
   title: 'Industries',
   alternates: { canonical: '/industries/' },
   description: OG_DESCRIPTION,
-  openGraph: { title: OG_TITLE, description: OG_DESCRIPTION, url: '/industries/' },
-  twitter: { card: 'summary_large_image', title: OG_TITLE, description: OG_DESCRIPTION },
+  openGraph: { title: OG_TITLE, description: OG_DESCRIPTION, url: '/industries/', images: [OG_IMAGE] },
+  twitter: { card: 'summary_large_image', title: OG_TITLE, description: OG_DESCRIPTION, images: [OG_IMAGE] },
 };
 
 const PLAYBOOK = {

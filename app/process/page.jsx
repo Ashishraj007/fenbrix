@@ -2,7 +2,7 @@ import PageHeader from '@/components/PageHeader';
 import Icon from '@/components/Icon';
 import Reveal, { Stagger, StaggerItem } from '@/components/Reveal';
 import CTA from '@/components/CTA';
-import { PROCESS } from '@/lib/content';
+import { PROCESS, OG_IMAGE } from '@/lib/content';
 
 const OG_TITLE = 'Process | Fenbrix';
 const OG_DESCRIPTION =
@@ -12,8 +12,8 @@ export const metadata = {
   title: 'Process',
   alternates: { canonical: '/process/' },
   description: OG_DESCRIPTION,
-  openGraph: { title: OG_TITLE, description: OG_DESCRIPTION, url: '/process/' },
-  twitter: { card: 'summary_large_image', title: OG_TITLE, description: OG_DESCRIPTION },
+  openGraph: { title: OG_TITLE, description: OG_DESCRIPTION, url: '/process/', images: [OG_IMAGE] },
+  twitter: { card: 'summary_large_image', title: OG_TITLE, description: OG_DESCRIPTION, images: [OG_IMAGE] },
 };
 
 export default function ProcessPage() {

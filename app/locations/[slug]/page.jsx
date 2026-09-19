@@ -1,7 +1,7 @@
 import { notFound } from 'next/navigation';
 import JsonLd from '@/components/JsonLd';
 import LocationDetail from '@/components/LocationDetail';
-import { LOCATIONS, SERVICES, SITE } from '@/lib/content';
+import { LOCATIONS, SERVICES, SITE, OG_IMAGE } from '@/lib/content';
 
 export const dynamicParams = false;
 
@@ -18,8 +18,8 @@ export function generateMetadata({ params }) {
     title: location.metaTitle,
     description: location.metaDescription,
     alternates: { canonical: path },
-    openGraph: { title: ogTitle, description: location.metaDescription, url: path },
-    twitter: { card: 'summary_large_image', title: ogTitle, description: location.metaDescription },
+    openGraph: { title: ogTitle, description: location.metaDescription, url: path, images: [OG_IMAGE] },
+    twitter: { card: 'summary_large_image', title: ogTitle, description: location.metaDescription, images: [OG_IMAGE] },
   };
 }
 

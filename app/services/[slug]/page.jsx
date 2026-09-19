@@ -1,7 +1,7 @@
 import { notFound } from 'next/navigation';
 import ServiceDetail from '@/components/ServiceDetail';
 import JsonLd from '@/components/JsonLd';
-import { SERVICES, SERVICE_DETAILS } from '@/lib/content';
+import { SERVICES, SERVICE_DETAILS, OG_IMAGE } from '@/lib/content';
 
 export const dynamicParams = false;
 
@@ -25,11 +25,13 @@ export function generateMetadata({ params }) {
       title: ogTitle,
       description: detail.metaDescription,
       url: path,
+      images: [OG_IMAGE],
     },
     twitter: {
       card: 'summary_large_image',
       title: ogTitle,
       description: detail.metaDescription,
+      images: [OG_IMAGE],
     },
   };
 }

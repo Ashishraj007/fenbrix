@@ -2,7 +2,7 @@ import PageHeader from '@/components/PageHeader';
 import Icon from '@/components/Icon';
 import Reveal from '@/components/Reveal';
 import ContactForm from '@/components/ContactForm';
-import { SITE } from '@/lib/content';
+import { SITE, OG_IMAGE } from '@/lib/content';
 
 const OG_TITLE = 'Contact | Fenbrix';
 const OG_DESCRIPTION =
@@ -12,8 +12,8 @@ export const metadata = {
   title: 'Contact',
   alternates: { canonical: '/contact/' },
   description: OG_DESCRIPTION,
-  openGraph: { title: OG_TITLE, description: OG_DESCRIPTION, url: '/contact/' },
-  twitter: { card: 'summary_large_image', title: OG_TITLE, description: OG_DESCRIPTION },
+  openGraph: { title: OG_TITLE, description: OG_DESCRIPTION, url: '/contact/', images: [OG_IMAGE] },
+  twitter: { card: 'summary_large_image', title: OG_TITLE, description: OG_DESCRIPTION, images: [OG_IMAGE] },
 };
 
 export default function ContactPage() {

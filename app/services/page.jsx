@@ -3,7 +3,7 @@ import PageHeader from '@/components/PageHeader';
 import Icon from '@/components/Icon';
 import Reveal, { Stagger, StaggerItem } from '@/components/Reveal';
 import CTA from '@/components/CTA';
-import { SERVICES, TECH_STACK } from '@/lib/content';
+import { SERVICES, TECH_STACK, OG_IMAGE } from '@/lib/content';
 
 const OG_TITLE = 'Services | Fenbrix';
 const OG_DESCRIPTION =
@@ -13,8 +13,8 @@ export const metadata = {
   title: 'Services',
   alternates: { canonical: '/services/' },
   description: OG_DESCRIPTION,
-  openGraph: { title: OG_TITLE, description: OG_DESCRIPTION, url: '/services/' },
-  twitter: { card: 'summary_large_image', title: OG_TITLE, description: OG_DESCRIPTION },
+  openGraph: { title: OG_TITLE, description: OG_DESCRIPTION, url: '/services/', images: [OG_IMAGE] },
+  twitter: { card: 'summary_large_image', title: OG_TITLE, description: OG_DESCRIPTION, images: [OG_IMAGE] },
 };
 
 export default function ServicesPage() {

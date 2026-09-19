@@ -4,7 +4,7 @@ import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import WhatsAppFab from '@/components/WhatsAppFab';
 import JsonLd from '@/components/JsonLd';
-import { SITE, FOUNDERS } from '@/lib/content';
+import { SITE, FOUNDERS, OG_IMAGE } from '@/lib/content';
 
 // Manrope is self-hosted (SIL Open Font License) — no external request at runtime.
 const manrope = localFont({
@@ -31,6 +31,11 @@ export const metadata = {
     'CRM development',
     'WhatsApp automation',
   ],
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: { index: true, follow: true },
+  },
   openGraph: {
     title: 'Fenbrix — One Partner. Your Entire Digital Business.',
     description:
@@ -39,12 +44,14 @@ export const metadata = {
     siteName: 'Fenbrix',
     locale: 'en_IN',
     type: 'website',
+    images: [OG_IMAGE],
   },
   twitter: {
     card: 'summary_large_image',
     title: 'Fenbrix — One Partner. Your Entire Digital Business.',
     description:
       'Marketing, content, websites, software and automation under one roof. Based in Noida, serving Delhi NCR and Gurugram.',
+    images: [OG_IMAGE],
   },
   icons: {
     icon: [

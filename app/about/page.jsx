@@ -4,6 +4,7 @@ import Reveal, { Stagger, StaggerItem } from '@/components/Reveal';
 import CTA from '@/components/CTA';
 import Founders from '@/components/Founders';
 import { LogoMark } from '@/components/Logo';
+import { OG_IMAGE } from '@/lib/content';
 
 const OG_TITLE = 'About | Fenbrix';
 const OG_DESCRIPTION =
@@ -13,8 +14,8 @@ export const metadata = {
   title: 'About',
   alternates: { canonical: '/about/' },
   description: OG_DESCRIPTION,
-  openGraph: { title: OG_TITLE, description: OG_DESCRIPTION, url: '/about/' },
-  twitter: { card: 'summary_large_image', title: OG_TITLE, description: OG_DESCRIPTION },
+  openGraph: { title: OG_TITLE, description: OG_DESCRIPTION, url: '/about/', images: [OG_IMAGE] },
+  twitter: { card: 'summary_large_image', title: OG_TITLE, description: OG_DESCRIPTION, images: [OG_IMAGE] },
 };
 
 const VALUES = [
