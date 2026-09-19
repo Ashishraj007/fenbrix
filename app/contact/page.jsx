@@ -4,11 +4,16 @@ import Reveal from '@/components/Reveal';
 import ContactForm from '@/components/ContactForm';
 import { SITE } from '@/lib/content';
 
+const OG_TITLE = 'Contact | Fenbrix';
+const OG_DESCRIPTION =
+  'Book a free digital audit with Fenbrix. Based in Noida, working with businesses across Delhi NCR.';
+
 export const metadata = {
   title: 'Contact',
   alternates: { canonical: '/contact/' },
-  description:
-    'Book a free digital audit with Fenbrix. Based in Noida, working with businesses across Delhi NCR.',
+  description: OG_DESCRIPTION,
+  openGraph: { title: OG_TITLE, description: OG_DESCRIPTION, url: '/contact/' },
+  twitter: { card: 'summary_large_image', title: OG_TITLE, description: OG_DESCRIPTION },
 };
 
 export default function ContactPage() {

@@ -5,11 +5,16 @@ import Reveal, { Stagger, StaggerItem } from '@/components/Reveal';
 import CTA from '@/components/CTA';
 import { INDUSTRIES } from '@/lib/content';
 
+const OG_TITLE = 'Industries | Fenbrix';
+const OG_DESCRIPTION =
+  'Fenbrix works with restaurants, salons, clinics, real estate, coaching institutes, retail, D2C brands and professional services across Noida and Delhi NCR.';
+
 export const metadata = {
   title: 'Industries',
   alternates: { canonical: '/industries/' },
-  description:
-    'Fenbrix works with restaurants, salons, clinics, real estate, coaching institutes, retail, D2C brands and professional services across Noida and Delhi NCR.',
+  description: OG_DESCRIPTION,
+  openGraph: { title: OG_TITLE, description: OG_DESCRIPTION, url: '/industries/' },
+  twitter: { card: 'summary_large_image', title: OG_TITLE, description: OG_DESCRIPTION },
 };
 
 const PLAYBOOK = {

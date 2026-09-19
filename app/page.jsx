@@ -1,7 +1,6 @@
 import Link from 'next/link';
 import Hero from '@/components/Hero';
 import Icon from '@/components/Icon';
-import Counter from '@/components/Counter';
 import Reveal, { Stagger, StaggerItem } from '@/components/Reveal';
 import Marquee from '@/components/Marquee';
 import CTA from '@/components/CTA';
@@ -106,7 +105,7 @@ export default function HomePage() {
               <StaggerItem key={s.label}>
                 <div className="text-center lg:text-left">
                   <div className="text-4xl font-extrabold tracking-tight text-teal-400 lg:text-5xl">
-                    <Counter to={s.value} suffix={s.suffix} />
+                    {s.value}{s.suffix}
                   </div>
                   <p className="mt-2 text-sm text-white/55">{s.label}</p>
                 </div>

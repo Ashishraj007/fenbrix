@@ -5,11 +5,16 @@ import Reveal, { Stagger, StaggerItem } from '@/components/Reveal';
 import CTA from '@/components/CTA';
 import { SERVICES, TECH_STACK } from '@/lib/content';
 
+const OG_TITLE = 'Services | Fenbrix';
+const OG_DESCRIPTION =
+  'Social media, content production, digital marketing, websites, custom software and automation — all delivered by one team in Noida.';
+
 export const metadata = {
   title: 'Services',
   alternates: { canonical: '/services/' },
-  description:
-    'Social media, content production, digital marketing, websites, custom software and automation — all delivered by one team in Noida.',
+  description: OG_DESCRIPTION,
+  openGraph: { title: OG_TITLE, description: OG_DESCRIPTION, url: '/services/' },
+  twitter: { card: 'summary_large_image', title: OG_TITLE, description: OG_DESCRIPTION },
 };
 
 export default function ServicesPage() {

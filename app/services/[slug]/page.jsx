@@ -16,14 +16,20 @@ export function generateMetadata({ params }) {
   if (!service || !detail) return {};
 
   const path = `/services/${service.slug}/`;
+  const ogTitle = `${detail.metaTitle} | Fenbrix`;
   return {
     title: detail.metaTitle,
     description: detail.metaDescription,
     alternates: { canonical: path },
     openGraph: {
-      title: `${detail.metaTitle} | Fenbrix`,
+      title: ogTitle,
       description: detail.metaDescription,
       url: path,
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: ogTitle,
+      description: detail.metaDescription,
     },
   };
 }

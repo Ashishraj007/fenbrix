@@ -4,11 +4,16 @@ import Reveal, { Stagger, StaggerItem } from '@/components/Reveal';
 import CTA from '@/components/CTA';
 import { PROCESS } from '@/lib/content';
 
+const OG_TITLE = 'Process | Fenbrix';
+const OG_DESCRIPTION =
+  'From discovery call to monthly review — the exact nine steps Fenbrix follows with every client.';
+
 export const metadata = {
   title: 'Process',
   alternates: { canonical: '/process/' },
-  description:
-    'From discovery call to monthly review — the exact nine steps Fenbrix follows with every client.',
+  description: OG_DESCRIPTION,
+  openGraph: { title: OG_TITLE, description: OG_DESCRIPTION, url: '/process/' },
+  twitter: { card: 'summary_large_image', title: OG_TITLE, description: OG_DESCRIPTION },
 };
 
 export default function ProcessPage() {

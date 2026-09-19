@@ -4,11 +4,16 @@ import Icon from '@/components/Icon';
 import Reveal, { Stagger, StaggerItem } from '@/components/Reveal';
 import CTA from '@/components/CTA';
 
+const OG_TITLE = 'Case Studies | Fenbrix';
+const OG_DESCRIPTION =
+  'How Fenbrix documents client results — starting audit, work performed, metrics, before/after and ROI.';
+
 export const metadata = {
   title: 'Case Studies',
   alternates: { canonical: '/case-studies/' },
-  description:
-    'How Fenbrix documents client results — starting audit, work performed, metrics, before/after and ROI.',
+  description: OG_DESCRIPTION,
+  openGraph: { title: OG_TITLE, description: OG_DESCRIPTION, url: '/case-studies/' },
+  twitter: { card: 'summary_large_image', title: OG_TITLE, description: OG_DESCRIPTION },
 };
 
 const FRAMEWORK = [

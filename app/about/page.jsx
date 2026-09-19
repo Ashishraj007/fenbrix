@@ -2,13 +2,19 @@ import PageHeader from '@/components/PageHeader';
 import Icon from '@/components/Icon';
 import Reveal, { Stagger, StaggerItem } from '@/components/Reveal';
 import CTA from '@/components/CTA';
+import Founders from '@/components/Founders';
 import { LogoMark } from '@/components/Logo';
+
+const OG_TITLE = 'About | Fenbrix';
+const OG_DESCRIPTION =
+  'Fenbrix is a Digital Growth & Technology partner based in Noida, built to replace the four-vendor mess most businesses live with.';
 
 export const metadata = {
   title: 'About',
   alternates: { canonical: '/about/' },
-  description:
-    'Fenbrix is a Digital Growth & Technology partner based in Noida, built to replace the four-vendor mess most businesses live with.',
+  description: OG_DESCRIPTION,
+  openGraph: { title: OG_TITLE, description: OG_DESCRIPTION, url: '/about/' },
+  twitter: { card: 'summary_large_image', title: OG_TITLE, description: OG_DESCRIPTION },
 };
 
 const VALUES = [
@@ -91,6 +97,8 @@ export default function AboutPage() {
           </Reveal>
         </div>
       </section>
+
+      <Founders />
 
       <section className="bg-mist py-20 lg:py-24">
         <div className="container-x">

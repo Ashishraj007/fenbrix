@@ -4,7 +4,7 @@ import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import WhatsAppFab from '@/components/WhatsAppFab';
 import JsonLd from '@/components/JsonLd';
-import { SITE } from '@/lib/content';
+import { SITE, FOUNDERS } from '@/lib/content';
 
 // Manrope is self-hosted (SIL Open Font License) — no external request at runtime.
 const manrope = localFont({
@@ -39,6 +39,12 @@ export const metadata = {
     siteName: 'Fenbrix',
     locale: 'en_IN',
     type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Fenbrix — One Partner. Your Entire Digital Business.',
+    description:
+      'Marketing, content, websites, software and automation under one roof. Based in Noida, serving Delhi NCR and Gurugram.',
   },
   icons: {
     icon: [
@@ -77,6 +83,13 @@ export default function RootLayout({ children }) {
               email: SITE.email,
               telephone: SITE.phone,
               areaServed: ['Noida', 'Delhi NCR', 'Delhi', 'Gurugram', 'Greater Noida', 'Ghaziabad'],
+              founder: {
+                '@type': 'Person',
+                name: FOUNDERS[0].name,
+                jobTitle: FOUNDERS[0].title,
+                url: 'https://fenbrix.in/about/',
+                sameAs: [FOUNDERS[0].instagram, FOUNDERS[0].linkedin],
+              },
             },
             {
               '@type': 'WebSite',

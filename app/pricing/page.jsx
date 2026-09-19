@@ -6,11 +6,16 @@ import Faq from '@/components/Faq';
 import CTA from '@/components/CTA';
 import { PACKAGES, PROJECT_PRICING, FAQS } from '@/lib/content';
 
+const OG_TITLE = 'Pricing | Fenbrix';
+const OG_DESCRIPTION =
+  'Monthly retainer packages from ₹15,000 and indicative project pricing for websites, software, apps and automation.';
+
 export const metadata = {
   title: 'Pricing',
   alternates: { canonical: '/pricing/' },
-  description:
-    'Monthly retainer packages from ₹15,000 and indicative project pricing for websites, software, apps and automation.',
+  description: OG_DESCRIPTION,
+  openGraph: { title: OG_TITLE, description: OG_DESCRIPTION, url: '/pricing/' },
+  twitter: { card: 'summary_large_image', title: OG_TITLE, description: OG_DESCRIPTION },
 };
 
 export default function PricingPage() {
@@ -84,11 +89,35 @@ export default function PricingPage() {
               </p>
             </div>
           </Reveal>
+
+          <Reveal delay={0.16}>
+            <div className="mt-5 rounded-2xl border-l-[3px] border-teal-600 bg-mist p-6">
+              <h3 className="text-[11px] font-extrabold uppercase tracking-[0.16em] text-navy">
+                What “no lock-in” means
+              </h3>
+              <p className="mt-2.5 max-w-3xl text-sm leading-relaxed text-navy/60">
+                Retainers run on a 3-month minimum term so there is enough runway to build, test and
+                measure — after that, they continue month to month and you can cancel anytime with
+                30 days&rsquo; written notice.
+              </p>
+            </div>
+          </Reveal>
+
+          <Reveal delay={0.2}>
+            <p className="mt-5 text-sm text-navy/55">
+              Not ready for a retainer? Websites start from ₹8,000, software projects start from
+              ₹60,000 and automation work starts from ₹15,000 —{' '}
+              <a href="#project-pricing" className="link-underline font-semibold text-teal-600">
+                see indicative project pricing below
+              </a>
+              .
+            </p>
+          </Reveal>
         </div>
       </section>
 
       {/* project pricing */}
-      <section className="bg-mist py-20 lg:py-24">
+      <section id="project-pricing" className="bg-mist py-20 lg:py-24 scroll-mt-24">
         <div className="container-x">
           <Reveal className="max-w-2xl">
             <span className="eyebrow">Project pricing</span>
