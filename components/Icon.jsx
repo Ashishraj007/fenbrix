@@ -22,6 +22,7 @@ const paths = {
   wa: 'M4 20l1.3-4A8 8 0 1112 20a8 8 0 01-4-1.1L4 20z',
   instagram: 'M7 3h10a4 4 0 014 4v10a4 4 0 01-4 4H7a4 4 0 01-4-4V7a4 4 0 014-4zM12 8.2a3.8 3.8 0 100 7.6 3.8 3.8 0 000-7.6zM16.6 6.4h.01',
   linkedin: 'M7 3h10a4 4 0 014 4v10a4 4 0 01-4 4H7a4 4 0 01-4-4V7a4 4 0 014-4zM7.5 7.8h.01M7.5 10.5V17M11 17v-4a2 2 0 014 0v4M11 17v-6.5',
+  chevron: 'M6 9l6 6 6-6',
 };
 
 export default function Icon({ name, className = 'h-5 w-5', strokeWidth = 1.7 }) {

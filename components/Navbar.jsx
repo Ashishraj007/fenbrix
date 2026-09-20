@@ -6,6 +6,7 @@ import { useEffect, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import Logo from './Logo';
 import Icon from './Icon';
+import { ServicesMegaMenu, ServicesAccordion } from './ServicesMegaMenu';
 import { NAV } from '@/lib/content';
 
 export default function Navbar() {
@@ -42,6 +43,9 @@ export default function Navbar() {
 
         <div className="hidden items-center gap-1 lg:flex">
           {NAV.map((item) => {
+            if (item.href === '/services/') {
+              return <ServicesMegaMenu key={item.href} />;
+            }
             const active = pathname === item.href;
             return (
               <Link
@@ -115,12 +119,16 @@ export default function Navbar() {
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: 0.05 + i * 0.05 }}
                 >
-                  <Link
-                    href={item.href}
-                    className="block rounded-xl px-4 py-3 text-base font-bold text-navy/80 transition-colors hover:bg-mist hover:text-navy"
-                  >
-                    {item.label}
-                  </Link>
+                  {item.href === '/services/' ? (
+                    <ServicesAccordion onNavigate={() => setOpen(false)} />
+                  ) : (
+                    <Link
+                      href={item.href}
+                      className="block rounded-xl px-4 py-3 text-base font-bold text-navy/80 transition-colors hover:bg-mist hover:text-navy"
+                    >
+                      {item.label}
+                    </Link>
+                  )}
                 </motion.div>
               ))}
               <Link href="/contact/" className="btn-primary mt-3 w-full">
