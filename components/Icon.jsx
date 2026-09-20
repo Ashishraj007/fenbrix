@@ -23,6 +23,9 @@ const paths = {
   instagram: 'M7 3h10a4 4 0 014 4v10a4 4 0 01-4 4H7a4 4 0 01-4-4V7a4 4 0 014-4zM12 8.2a3.8 3.8 0 100 7.6 3.8 3.8 0 000-7.6zM16.6 6.4h.01',
   linkedin: 'M7 3h10a4 4 0 014 4v10a4 4 0 01-4 4H7a4 4 0 01-4-4V7a4 4 0 014-4zM7.5 7.8h.01M7.5 10.5V17M11 17v-4a2 2 0 014 0v4M11 17v-6.5',
   chevron: 'M6 9l6 6 6-6',
+  search: 'M11 4a7 7 0 100 14 7 7 0 000-14zM21 21l-4.35-4.35',
+  shield: 'M12 3l7 3v6c0 4.5-3 8-7 9-4-1-7-4.5-7-9V6l7-3z',
+  play: 'M8 5l11 7-11 7V5z',
 };
 
 export default function Icon({ name, className = 'h-5 w-5', strokeWidth = 1.7 }) {

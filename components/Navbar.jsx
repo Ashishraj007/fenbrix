@@ -7,6 +7,7 @@ import { AnimatePresence, motion } from 'framer-motion';
 import Logo from './Logo';
 import Icon from './Icon';
 import { ServicesMegaMenu, ServicesAccordion } from './ServicesMegaMenu';
+import { DigitalProductsMegaMenu, DigitalProductsAccordion } from './DigitalProductsMegaMenu';
 import { NAV } from '@/lib/content';
 
 export default function Navbar() {
@@ -45,6 +46,9 @@ export default function Navbar() {
           {NAV.map((item) => {
             if (item.href === '/services/') {
               return <ServicesMegaMenu key={item.href} />;
+            }
+            if (item.href === '/digital-products/') {
+              return <DigitalProductsMegaMenu key={item.href} />;
             }
             const active = pathname === item.href;
             return (
@@ -121,6 +125,8 @@ export default function Navbar() {
                 >
                   {item.href === '/services/' ? (
                     <ServicesAccordion onNavigate={() => setOpen(false)} />
+                  ) : item.href === '/digital-products/' ? (
+                    <DigitalProductsAccordion onNavigate={() => setOpen(false)} />
                   ) : (
                     <Link
                       href={item.href}
