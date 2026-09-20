@@ -14,7 +14,7 @@ export const metadata = {
   title: 'About',
   alternates: { canonical: '/about/' },
   description: OG_DESCRIPTION,
-  openGraph: { title: OG_TITLE, description: OG_DESCRIPTION, url: '/about/', images: [OG_IMAGE] },
+  openGraph: { type: 'website', title: OG_TITLE, description: OG_DESCRIPTION, url: '/about/', images: [OG_IMAGE] },
   twitter: { card: 'summary_large_image', title: OG_TITLE, description: OG_DESCRIPTION, images: [OG_IMAGE] },
 };
 

@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://fenbrix.in/sitemap.xml
+Sitemap: https://www.fenbrix.in/sitemap.xml

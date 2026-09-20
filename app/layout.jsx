@@ -16,7 +16,7 @@ const manrope = localFont({
 });
 
 export const metadata = {
-  metadataBase: new URL('https://fenbrix.in'),
+  metadataBase: new URL('https://www.fenbrix.in'),
   title: {
     default: 'Fenbrix — One Partner. Your Entire Digital Business.',
     template: '%s | Fenbrix',
@@ -40,7 +40,7 @@ export const metadata = {
     title: 'Fenbrix — One Partner. Your Entire Digital Business.',
     description:
       'Marketing, content, websites, software and automation under one roof. Based in Noida, serving Delhi NCR and Gurugram.',
-    url: 'https://fenbrix.in',
+    url: 'https://www.fenbrix.in',
     siteName: 'Fenbrix',
     locale: 'en_IN',
     type: 'website',
@@ -82,10 +82,10 @@ export default function RootLayout({ children }) {
           '@graph': [
             {
               '@type': 'Organization',
-              '@id': 'https://fenbrix.in/#organization',
+              '@id': 'https://www.fenbrix.in/#organization',
               name: SITE.name,
-              url: 'https://fenbrix.in/',
-              logo: 'https://fenbrix.in/logo/icon-primary-512.png',
+              url: 'https://www.fenbrix.in/',
+              logo: 'https://www.fenbrix.in/logo/icon-primary-512.png',
               description: 'Fenbrix is a Digital Growth & Technology agency serving businesses across Noida and Delhi NCR.',
               email: SITE.email,
               telephone: SITE.phone,
@@ -94,16 +94,16 @@ export default function RootLayout({ children }) {
                 '@type': 'Person',
                 name: FOUNDERS[0].name,
                 jobTitle: FOUNDERS[0].title,
-                url: 'https://fenbrix.in/about/',
+                url: 'https://www.fenbrix.in/about/',
                 sameAs: [FOUNDERS[0].instagram, FOUNDERS[0].linkedin],
               },
             },
             {
               '@type': 'WebSite',
-              '@id': 'https://fenbrix.in/#website',
-              url: 'https://fenbrix.in/',
+              '@id': 'https://www.fenbrix.in/#website',
+              url: 'https://www.fenbrix.in/',
               name: SITE.name,
-              publisher: { '@id': 'https://fenbrix.in/#organization' },
+              publisher: { '@id': 'https://www.fenbrix.in/#organization' },
             },
           ],
         }} />

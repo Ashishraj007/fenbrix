@@ -13,7 +13,7 @@ export const metadata = {
   title: 'Case Studies',
   alternates: { canonical: '/case-studies/' },
   description: OG_DESCRIPTION,
-  openGraph: { title: OG_TITLE, description: OG_DESCRIPTION, url: '/case-studies/', images: [OG_IMAGE] },
+  openGraph: { type: 'website', title: OG_TITLE, description: OG_DESCRIPTION, url: '/case-studies/', images: [OG_IMAGE] },
   twitter: { card: 'summary_large_image', title: OG_TITLE, description: OG_DESCRIPTION, images: [OG_IMAGE] },
 };
 

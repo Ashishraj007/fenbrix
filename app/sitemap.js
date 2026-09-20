@@ -2,7 +2,7 @@ import { LOCATIONS, SERVICES } from '@/lib/content';
 
 export const dynamic = 'force-static';
 
-const BASE = 'https://fenbrix.in';
+const BASE = 'https://www.fenbrix.in';
 
 const routes = ['', '/services', '/industries', '/process', '/pricing', '/case-studies', '/about', '/contact'];
 

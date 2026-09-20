@@ -12,7 +12,7 @@ export const metadata = {
   title: 'Contact',
   alternates: { canonical: '/contact/' },
   description: OG_DESCRIPTION,
-  openGraph: { title: OG_TITLE, description: OG_DESCRIPTION, url: '/contact/', images: [OG_IMAGE] },
+  openGraph: { type: 'website', title: OG_TITLE, description: OG_DESCRIPTION, url: '/contact/', images: [OG_IMAGE] },
   twitter: { card: 'summary_large_image', title: OG_TITLE, description: OG_DESCRIPTION, images: [OG_IMAGE] },
 };
 

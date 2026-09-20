@@ -18,7 +18,7 @@ export function generateMetadata({ params }) {
     title: location.metaTitle,
     description: location.metaDescription,
     alternates: { canonical: path },
-    openGraph: { title: ogTitle, description: location.metaDescription, url: path, images: [OG_IMAGE] },
+    openGraph: { type: 'website', title: ogTitle, description: location.metaDescription, url: path, images: [OG_IMAGE] },
     twitter: { card: 'summary_large_image', title: ogTitle, description: location.metaDescription, images: [OG_IMAGE] },
   };
 }
@@ -26,16 +26,16 @@ export function generateMetadata({ params }) {
 export default function LocationPage({ params }) {
   const location = LOCATIONS.find((item) => item.slug === params.slug);
   if (!location) notFound();
-  const url = `https://fenbrix.in/locations/${location.slug}/`;
+  const url = `https://www.fenbrix.in/locations/${location.slug}/`;
   const faqs = location.faqs.map(([name, text]) => ({ '@type': 'Question', name, acceptedAnswer: { '@type': 'Answer', text } }));
 
   return (
     <>
       <JsonLd data={{ '@context': 'https://schema.org', '@graph': [
-        { '@type': 'BreadcrumbList', itemListElement: [{ '@type': 'ListItem', position: 1, name: 'Home', item: 'https://fenbrix.in/' }, { '@type': 'ListItem', position: 2, name: location.name, item: url }] },
+        { '@type': 'BreadcrumbList', itemListElement: [{ '@type': 'ListItem', position: 1, name: 'Home', item: 'https://www.fenbrix.in/' }, { '@type': 'ListItem', position: 2, name: location.name, item: url }] },
         {
           '@type': 'LocalBusiness',
-          '@id': 'https://fenbrix.in/#organization',
+          '@id': 'https://www.fenbrix.in/#organization',
           name: SITE.name,
           url,
           email: SITE.email,

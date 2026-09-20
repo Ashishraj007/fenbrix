@@ -13,7 +13,7 @@ export const metadata = {
   title: 'Industries',
   alternates: { canonical: '/industries/' },
   description: OG_DESCRIPTION,
-  openGraph: { title: OG_TITLE, description: OG_DESCRIPTION, url: '/industries/', images: [OG_IMAGE] },
+  openGraph: { type: 'website', title: OG_TITLE, description: OG_DESCRIPTION, url: '/industries/', images: [OG_IMAGE] },
   twitter: { card: 'summary_large_image', title: OG_TITLE, description: OG_DESCRIPTION, images: [OG_IMAGE] },
 };
 
