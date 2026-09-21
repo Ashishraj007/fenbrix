@@ -71,6 +71,11 @@ export default function RootLayout({ children }) {
     <html lang="en" className={`${manrope.variable} no-js`}>
       <head>
         <script
+          src="https://analytics.ahrefs.com/analytics.js"
+          data-key="yigK1I0izeA9q75SRNzPJg"
+          async
+        />
+        <script
           dangerouslySetInnerHTML={{
             __html: `document.documentElement.classList.remove('no-js');`,
           }}
