@@ -5,10 +5,72 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { AnimatePresence, motion } from 'framer-motion';
 import Icon from './Icon';
+import { THEMES, VISUALS } from './ServiceVisuals';
 import { SERVICES } from '@/lib/content';
 
 const EASE = [0.22, 1, 0.36, 1];
 const CLOSE_DELAY = 150;
+
+const VALUE_POINTS = [
+  { icon: 'bolt', label: 'One team for everything' },
+  { icon: 'trend', label: 'Strategy to execution' },
+  { icon: 'check', label: 'Built for real business' },
+];
+
+function MiniServiceCard({ service, index, onNavigate }) {
+  const theme = THEMES[service.theme] || THEMES.teal;
+  const Visual = VISUALS[service.slug];
+  const number = String(index + 1).padStart(2, '0');
+
+  return (
+    <Link
+      href={`/services/${service.slug}/`}
+      role="menuitem"
+      onClick={onNavigate}
+      className={`group relative flex flex-col overflow-hidden rounded-2xl border ${theme.border} bg-gradient-to-br ${theme.bg} to-white p-4 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lift focus:outline-none focus-visible:ring-2 focus-visible:ring-teal-400`}
+    >
+      <div className="flex items-start justify-between">
+        <span
+          className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-xl ${theme.iconBg} ${theme.iconText}`}
+        >
+          <Icon name={service.icon} className="h-5 w-5" strokeWidth={1.8} />
+        </span>
+        <div className="relative h-[68px] w-[84px] shrink-0 origin-top-right scale-[0.62] transition-transform duration-300 ease-out group-hover:-translate-y-0.5">
+          <Visual theme={theme} />
+        </div>
+      </div>
+
+      <span className={`mt-2.5 text-[10px] font-extrabold tracking-[0.12em] ${theme.numberText}`}>{number}</span>
+      <h3 className="mt-0.5 text-[14px] font-extrabold leading-tight text-navy">{service.title}</h3>
+      <p className="mt-1 text-[12px] leading-snug text-navy/55">{service.short}</p>
+
+      <ul className="mt-2.5 space-y-1.5">
+        {service.items.slice(0, 3).map((item) => (
+          <li key={item} className="flex items-start gap-2 text-[11.5px] leading-snug text-navy/65">
+            <Icon name="check" className={`mt-0.5 h-3 w-3 shrink-0 ${theme.check}`} strokeWidth={2.8} />
+            {item}
+          </li>
+        ))}
+      </ul>
+
+      <div className="mt-3 flex items-center justify-between border-t border-line/70 pt-3">
+        <span className="inline-flex items-center gap-1.5 text-[12px] font-extrabold text-teal-600">
+          Explore service
+          <Icon
+            name="arrow"
+            className="h-3 w-3 transition-transform duration-300 group-hover:translate-x-1"
+          />
+        </span>
+        <span
+          aria-hidden="true"
+          className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-white text-navy shadow-soft transition-transform duration-300 group-hover:translate-x-0.5"
+        >
+          <Icon name="arrow" className="h-3.5 w-3.5" />
+        </span>
+      </div>
+    </Link>
+  );
+}
 
 // Desktop mega-menu — hangs off the "Services" nav item, driven entirely by
 // the SERVICES catalogue in lib/content.js (the same source used by the
@@ -115,55 +177,108 @@ export function ServicesMegaMenu() {
               id={menuId}
               role="menu"
               aria-label="Services"
-              initial={{ opacity: 0, y: -6, scale: 0.99 }}
+              initial={{ opacity: 0, y: -8, scale: 0.98 }}
               animate={{ opacity: 1, y: 0, scale: 1 }}
-              exit={{ opacity: 0, y: -6, scale: 0.99 }}
-              transition={{ duration: 0.18, ease: EASE }}
+              exit={{ opacity: 0, y: -8, scale: 0.98 }}
+              transition={{ duration: 0.22, ease: EASE }}
               onMouseEnter={openNow}
               onMouseLeave={scheduleClose}
               className="pointer-events-auto"
             >
-              <div className="overflow-hidden rounded-2xl border border-line bg-white shadow-lift">
-                <div className="grid gap-1 p-6 sm:grid-cols-2 lg:grid-cols-3">
-                  {SERVICES.map((s) => (
-                    <Link
-                      key={s.slug}
-                      href={`/services/${s.slug}/`}
-                      role="menuitem"
-                      onClick={() => setOpen(false)}
-                      className="group flex flex-col gap-3 rounded-xl p-4 transition-colors duration-300 hover:bg-mist focus:outline-none focus-visible:bg-mist focus-visible:ring-2 focus-visible:ring-teal-400"
-                    >
-                      <div className="flex items-center gap-3">
-                        <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-navy text-teal-400 transition-colors duration-300 group-hover:bg-teal-600 group-hover:text-white">
-                          <Icon name={s.icon} className="h-5 w-5" />
-                        </div>
-                        <h3 className="text-[14px] font-extrabold leading-tight text-navy">{s.title}</h3>
-                      </div>
-                      <p className="text-[12.5px] leading-relaxed text-navy/55">{s.short}</p>
-                      <ul className="space-y-1.5 border-t border-line pt-3">
-                        {s.items.slice(0, 3).map((it) => (
-                          <li key={it} className="flex gap-2 text-[12px] text-navy/60">
-                            <Icon name="check" className="mt-0.5 h-3 w-3 shrink-0 text-teal-600" strokeWidth={2.8} />
-                            <span className="leading-snug">{it}</span>
+              <div className="max-h-[calc(100vh-96px)] overflow-y-auto overflow-x-hidden rounded-[24px] border border-line bg-white/95 shadow-lift backdrop-blur-xl">
+                <div className="grid lg:grid-cols-[27%_1fr]">
+                  {/* ---------- LEFT SIDEBAR ---------- */}
+                  <div className="flex flex-col justify-between gap-8 border-b border-line bg-mist/60 p-7 lg:border-b-0 lg:border-r">
+                    <div>
+                      <span className="eyebrow">Our services</span>
+                      <h3 className="mt-3 text-[1.55rem] font-extrabold leading-[1.15] tracking-[-0.02em] text-navy">
+                        Everything you need to grow, in <span className="text-gradient">one place.</span>
+                      </h3>
+                      <p className="mt-3 text-[13px] leading-relaxed text-navy/55">
+                        From strategy to execution, we help businesses build, market and scale with
+                        the right mix of creativity and technology.
+                      </p>
+
+                      <ul className="mt-6 space-y-3">
+                        {VALUE_POINTS.map((v) => (
+                          <li key={v.label} className="flex items-center gap-2.5 text-[12.5px] font-bold text-navy/70">
+                            <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-teal-500/10 text-teal-600">
+                              <Icon name={v.icon} className="h-3.5 w-3.5" strokeWidth={2.2} />
+                            </span>
+                            {v.label}
                           </li>
                         ))}
                       </ul>
-                    </Link>
-                  ))}
+                    </div>
+
+                    <div className="hidden xl:block" aria-hidden="true">
+                      <svg width="60" height="38" viewBox="0 0 60 38" fill="none" className="text-navy/25">
+                        <path
+                          d="M6 6C22 5 40 10 50 28"
+                          stroke="currentColor"
+                          strokeWidth="1.5"
+                          strokeLinecap="round"
+                          strokeDasharray="1 6"
+                        />
+                        <path
+                          d="M40 24L51 29L53 18"
+                          stroke="currentColor"
+                          strokeWidth="1.5"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        />
+                      </svg>
+                      <p className="-mt-0.5 select-none font-serif text-[14px] italic leading-snug text-navy/40">
+                        Ideas.
+                        <br />
+                        Execution.
+                        <br />
+                        Real Growth.
+                      </p>
+                    </div>
+                  </div>
+
+                  {/* ---------- RIGHT SERVICE GRID ---------- */}
+                  <div className="p-6">
+                    <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
+                      {SERVICES.map((s, i) => (
+                        <MiniServiceCard
+                          key={s.slug}
+                          service={s}
+                          index={i}
+                          onNavigate={() => setOpen(false)}
+                        />
+                      ))}
+                    </div>
+                  </div>
                 </div>
 
-                <div className="flex flex-wrap items-center justify-between gap-3 border-t border-line bg-mist px-6 py-4">
-                  <p className="text-[13px] font-semibold text-navy/70">
-                    Explore every service in detail on one page.
-                  </p>
+                {/* ---------- BOTTOM CTA ---------- */}
+                <div className="flex flex-wrap items-center justify-between gap-3 border-t border-line bg-teal-50/40 px-7 py-3.5">
+                  <div className="flex items-center gap-2.5">
+                    <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-white text-teal-600 shadow-soft">
+                      <Icon name="phone" className="h-3.5 w-3.5" strokeWidth={1.9} />
+                    </span>
+                    <div>
+                      <p className="text-[13px] font-extrabold leading-tight text-navy">
+                        Not sure which service fits you?
+                      </p>
+                      <p className="text-[12px] leading-tight text-navy/55">
+                        Talk to our team and get a personalized recommendation.
+                      </p>
+                    </div>
+                  </div>
                   <Link
                     href="/services/"
                     role="menuitem"
                     onClick={() => setOpen(false)}
-                    className="btn-ghost shrink-0 py-2 text-[13px]"
+                    className="group/cta flex h-[50px] min-w-[172px] shrink-0 items-center justify-center gap-2 rounded-full bg-navy px-5 text-[13px] font-bold text-white transition-all duration-300 hover:bg-navy-700 hover:shadow-lift active:scale-[0.98]"
                   >
-                    View all services
-                    <Icon name="arrow" className="h-4 w-4" />
+                    Explore services
+                    <Icon
+                      name="arrow"
+                      className="h-4 w-4 transition-transform duration-300 group-hover/cta:translate-x-1"
+                    />
                   </Link>
                 </div>
               </div>

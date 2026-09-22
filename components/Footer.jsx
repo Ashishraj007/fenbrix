@@ -108,7 +108,7 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="mt-14 flex flex-col gap-4 border-t border-white/10 pt-7 text-xs text-white/45 sm:flex-row sm:items-center sm:justify-between">
+        <div className="mt-10 flex flex-col gap-4 border-t border-white/10 pt-6 text-xs text-white/45 sm:flex-row sm:items-center sm:justify-between">
           <p>© {year} {SITE.name}. All rights reserved.</p>
           <p>Pricing shown across this site is indicative and depends on scope.</p>
         </div>

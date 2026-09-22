@@ -6,7 +6,7 @@ export default function PageHeader({ eyebrow, title, body }) {
   return (
     <section className="surface-dark relative overflow-hidden">
       <div className="pointer-events-none absolute -right-24 -top-16 h-72 w-72 animate-float rounded-full bg-teal-400/10 blur-3xl" />
-      <div className="container-x relative z-10 py-16 lg:py-24">
+      <div className="container-x relative z-10 py-14 lg:py-20">
         <motion.span
           initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}

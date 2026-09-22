@@ -87,7 +87,7 @@ export default function DigitalProductCategoryPage({ params }) {
           <DigitalProductExplorer products={products} showCategoryFilter={false} />
 
           {otherCategories.length > 0 && (
-            <div className="mt-16 border-t border-line pt-10">
+            <div className="mt-10 border-t border-line pt-6">
               <p className="eyebrow">Browse other categories</p>
               <div className="mt-4 flex flex-wrap gap-2">
                 {otherCategories.map((c) => (

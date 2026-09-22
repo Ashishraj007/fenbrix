@@ -86,7 +86,7 @@ function FounderCard({ person, reverse = false }) {
 
 export default function Founders({ people = FOUNDERS }) {
   return (
-    <section className="surface-dark relative overflow-hidden py-20 lg:py-28">
+    <section className="surface-dark relative overflow-hidden py-20 lg:py-24">
       <div className="container-x relative space-y-24">
         {people.map((person, i) => (
           <FounderCard key={person.name} person={person} reverse={i % 2 === 1} />

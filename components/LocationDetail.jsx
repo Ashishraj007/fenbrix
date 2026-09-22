@@ -25,7 +25,7 @@ export default function LocationDetail({ location }) {
       </section>
 
       {/* ---------- LOCAL CONTEXT ---------- */}
-      <section className="py-20 lg:py-24">
+      <section className="py-14 lg:py-20">
         <div className="container-x grid gap-10 lg:grid-cols-[.8fr_1.2fr] lg:gap-20">
           <Reveal><span className="eyebrow">Local context</span><h2 className="h2 mt-4">Useful digital work starts with how the business actually operates.</h2></Reveal>
           <Reveal delay={0.1}><p className="lede">{location.context}</p></Reveal>
@@ -102,7 +102,7 @@ export default function LocationDetail({ location }) {
       </section>
 
       {/* ---------- INDUSTRIES ---------- */}
-      <section className="py-20 lg:py-24">
+      <section className="py-14 lg:py-20">
         <div className="container-x grid gap-10 lg:grid-cols-[.8fr_1.2fr] lg:items-end">
           <Reveal><span className="eyebrow">Industries we serve in {location.name}</span><h2 className="h2 mt-4">Digital work that fits the business model.</h2><p className="lede mt-5">Different sectors need different customer journeys, content and follow-up. These are the areas we focus on first in {location.name}.</p></Reveal>
           <Reveal delay={0.1} className="flex flex-wrap gap-3"><Link href="/industries/" className="chip transition-colors hover:border-teal-400 hover:text-teal-600">Explore industries <Icon name="arrow" className="h-3.5 w-3.5" /></Link>{location.industries.map((industry) => <span key={industry} className="chip">{industry}</span>)}</Reveal>

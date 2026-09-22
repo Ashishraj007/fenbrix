@@ -3,6 +3,7 @@ import Hero from '@/components/Hero';
 import Icon from '@/components/Icon';
 import Reveal, { Stagger, StaggerItem } from '@/components/Reveal';
 import Marquee from '@/components/Marquee';
+import BeforeAfterFlow from '@/components/BeforeAfterFlow';
 import CTA from '@/components/CTA';
 import { SERVICES, STATS, DIFFERENTIATORS, PROCESS, PACKAGES, INDUSTRIES } from '@/lib/content';
 
@@ -20,7 +21,7 @@ export default function HomePage() {
       <section className="relative overflow-hidden py-20 lg:py-28">
         <div className="absolute inset-0 grid-lines opacity-60" />
         <div className="container-x relative">
-          <div className="grid gap-12 lg:grid-cols-2 lg:gap-16">
+          <div className="grid gap-12 lg:grid-cols-2 lg:gap-12">
             <Reveal>
               <span className="eyebrow">The problem</span>
               <h2 className="h2 mt-4">
@@ -60,6 +61,8 @@ export default function HomePage() {
           </div>
         </div>
       </section>
+
+      <BeforeAfterFlow />
 
       {/* ---------- SERVICES ---------- */}
       <section className="bg-mist py-20 lg:py-28">
@@ -182,7 +185,7 @@ export default function HomePage() {
       </section>
 
       {/* ---------- INDUSTRIES ---------- */}
-      <section className="py-20 lg:py-28">
+      <section className="py-16 lg:py-24">
         <div className="container-x">
           <Reveal className="max-w-2xl">
             <span className="eyebrow">Who we work with</span>

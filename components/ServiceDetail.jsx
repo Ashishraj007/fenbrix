@@ -74,7 +74,7 @@ export default function ServiceDetail({ service, detail }) {
         </div>
       </section>
 
-      <section className="py-20 lg:py-24">
+      <section className="py-14 lg:py-20">
         <div className="container-x grid gap-10 lg:grid-cols-[.8fr_1.2fr] lg:items-center">
           <SectionIntro eyebrow="Across Delhi NCR" title={`${service.title} for businesses in Noida and beyond.`} body={`Fenbrix is based in Noida and supports businesses across Delhi NCR. Whether your team is in Delhi, Gurugram or a nearby market, we use a structured remote process and connect meetings or on-site work to the needs of the project—not a generic location package.`} />
           <Reveal delay={0.1} className="flex flex-wrap gap-3">
@@ -135,7 +135,7 @@ export default function ServiceDetail({ service, detail }) {
         </div>
       </section>
 
-      <section className="bg-mist py-20 lg:py-24">
+      <section className="bg-mist py-14 lg:py-20">
         <div className="container-x grid gap-10 lg:grid-cols-[.8fr_1.2fr] lg:items-end">
           <SectionIntro eyebrow="Who we help" title="Relevant to businesses with a real need for it." body="These are some of the sectors where this work most naturally connects to customer acquisition and operations." />
           <Reveal delay={0.1} className="flex flex-wrap gap-3">
@@ -144,7 +144,7 @@ export default function ServiceDetail({ service, detail }) {
         </div>
       </section>
 
-      <section className="py-20 lg:py-24">
+      <section className="py-10 lg:py-14">
         <div className="container-x">
           <Reveal>
             <div className="surface-dark relative overflow-hidden rounded-3xl p-8 text-white sm:p-12">

@@ -26,6 +26,14 @@ const paths = {
   search: 'M11 4a7 7 0 100 14 7 7 0 000-14zM21 21l-4.35-4.35',
   shield: 'M12 3l7 3v6c0 4.5-3 8-7 9-4-1-7-4.5-7-9V6l7-3z',
   play: 'M8 5l11 7-11 7V5z',
+  pencil: 'M17 3a2.828 2.828 0 114 4L7.5 20.5 2 22l1.5-5.5L17 3z',
+  chart: 'M6 20V10M12 20V4M18 20v-6',
+  megaphone: 'M3 10v4a1 1 0 001 1h2l10 5V4L6 9H4a1 1 0 00-1 1zM15 8a4 4 0 010 8M18.5 5a8 8 0 010 14',
+  facebook: 'M14 21v-7h2.5l.5-3H14V9a1.5 1.5 0 011.5-1.5H17V4.5h-2A4 4 0 0011 8.5V11H9v3h2v7',
+  bot: 'M12 3v3M7 8h10a2 2 0 012 2v7a2 2 0 01-2 2H7a2 2 0 01-2-2v-7a2 2 0 012-2zM9 13v.01M15 13v.01M9 17h6',
+  cursor: 'M6 4l14 6.2-6 1.8-1.8 6L6 4z',
+  people: 'M8 12a3 3 0 100-6 3 3 0 000 6zM2 20c0-3.3 2.7-6 6-6s6 2.7 6 6M16 8a3 3 0 100-6M22 20c0-2.8-1.8-5.1-4.5-5.8',
+  trend: 'M3 17l6-6 4 4 8-8M15 7h6v6',
 };
 
 export default function Icon({ name, className = 'h-5 w-5', strokeWidth = 1.7 }) {

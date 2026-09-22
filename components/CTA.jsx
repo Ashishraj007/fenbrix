@@ -8,7 +8,7 @@ export default function CTA({
   body = 'A short call, then a written audit of your social media, website, ads and follow-up process. You keep the audit whether you work with us or not.',
 }) {
   return (
-    <section className="py-20 lg:py-24">
+    <section className="py-10 lg:py-14">
       <div className="container-x">
         <Reveal>
           <div className="surface-dark relative overflow-hidden rounded-3xl px-7 py-14 text-center sm:px-14 lg:py-20">

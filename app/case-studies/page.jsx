@@ -51,7 +51,7 @@ export default function CaseStudiesPage() {
             </div>
           </Reveal>
 
-          <Reveal delay={0.08} className="mt-14 max-w-2xl">
+          <Reveal delay={0.08} className="mt-10 max-w-2xl">
             <span className="eyebrow">The framework</span>
             <h2 className="h2 mt-4">Six things every case study must contain.</h2>
           </Reveal>
@@ -71,7 +71,7 @@ export default function CaseStudiesPage() {
           </Stagger>
 
           <Reveal delay={0.12}>
-            <div className="mt-14 flex flex-col items-start gap-6 rounded-2xl border border-line bg-white p-8 shadow-soft sm:flex-row sm:items-center sm:justify-between">
+            <div className="mt-10 flex flex-col items-start gap-6 rounded-2xl border border-line bg-white p-8 shadow-soft sm:flex-row sm:items-center sm:justify-between">
               <div>
                 <h3 className="h3">Want to be one of our first case studies?</h3>
                 <p className="mt-2 max-w-lg text-sm text-navy/55">
