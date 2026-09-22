@@ -1,8 +1,8 @@
-import PageHeader from '@/components/PageHeader';
 import Icon from '@/components/Icon';
 import Reveal, { Stagger, StaggerItem } from '@/components/Reveal';
 import CTA from '@/components/CTA';
-import { PROCESS, OG_IMAGE } from '@/lib/content';
+import ProcessJourney from '@/components/ProcessJourney';
+import { OG_IMAGE } from '@/lib/content';
 
 const OG_TITLE = 'Process | Fenbrix';
 const OG_DESCRIPTION =
@@ -19,40 +19,7 @@ export const metadata = {
 export default function ProcessPage() {
   return (
     <>
-      <PageHeader
-        eyebrow="Process"
-        title="No mystery. Here is exactly how we work."
-        body="The same nine steps run for every client, whether you are on a ₹15,000 retainer or building a CRM with us."
-      />
-
-      <section className="py-20 lg:py-24">
-        <div className="container-x">
-          <div className="relative">
-            <div className="absolute left-[19px] top-2 hidden h-[calc(100%-2rem)] w-px bg-line sm:block" />
-
-            <Stagger className="space-y-5" gap={0.07}>
-              {PROCESS.map((p) => (
-                <StaggerItem key={p.step}>
-                  <div className="relative flex gap-6">
-                    <div className="hidden sm:block">
-                      <div className="relative z-10 flex h-10 w-10 items-center justify-center rounded-full border border-line bg-white text-[12px] font-extrabold text-teal-600 shadow-soft">
-                        {p.step}
-                      </div>
-                    </div>
-                    <div className="flex-1 rounded-2xl border border-line bg-white p-6 shadow-soft transition-all duration-400 hover:-translate-y-0.5 hover:border-teal-400/45 hover:shadow-lift sm:p-7">
-                      <span className="text-[12px] font-extrabold tracking-[0.1em] text-teal-600 sm:hidden">
-                        {p.step}
-                      </span>
-                      <h2 className="h3 mt-1 sm:mt-0">{p.title}</h2>
-                      <p className="mt-2.5 text-[15px] leading-relaxed text-navy/60">{p.body}</p>
-                    </div>
-                  </div>
-                </StaggerItem>
-              ))}
-            </Stagger>
-          </div>
-        </div>
-      </section>
+      <ProcessJourney />
 
       <section className="bg-mist py-20 lg:py-24">
         <div className="container-x grid gap-12 lg:grid-cols-2 lg:gap-16">
