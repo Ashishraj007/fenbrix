@@ -37,12 +37,12 @@ export default function Navbar() {
           : 'border-b border-transparent bg-transparent'
       }`}
     >
-      <nav className="container-x flex h-[72px] items-center justify-between gap-6">
-        <Link href="/" aria-label="Fenbrix home" className="transition-opacity hover:opacity-80">
+      <nav className="mx-auto flex h-[72px] w-full max-w-[1360px] items-center justify-between gap-8 px-5 sm:px-7 lg:px-8">
+        <Link href="/" aria-label="Fenbrix home" className="shrink-0 transition-opacity hover:opacity-80">
           <Logo />
         </Link>
 
-        <div className="hidden items-center gap-1 lg:flex">
+        <div className="hidden items-center gap-2 xl:flex">
           {NAV.map((item) => {
             if (item.href === '/services/') {
               return <ServicesMegaMenu key={item.href} />;
@@ -55,7 +55,7 @@ export default function Navbar() {
               <Link
                 key={item.href}
                 href={item.href}
-                className={`relative rounded-full px-4 py-2 text-sm font-bold transition-colors ${
+                className={`relative shrink-0 whitespace-nowrap rounded-full px-4 py-2 text-sm font-bold leading-none transition-colors ${
                   active ? 'text-teal-600' : 'text-navy/70 hover:text-navy'
                 }`}
               >
@@ -72,8 +72,8 @@ export default function Navbar() {
           })}
         </div>
 
-        <div className="hidden items-center gap-3 lg:flex">
-          <Link href="/contact/" className="btn-primary text-[13px]">
+        <div className="hidden shrink-0 items-center gap-3 xl:flex">
+          <Link href="/contact/" className="btn-primary shrink-0 whitespace-nowrap text-[13px]">
             Get a free audit
             <Icon name="arrow" className="h-4 w-4" />
           </Link>
@@ -84,7 +84,7 @@ export default function Navbar() {
           onClick={() => setOpen((v) => !v)}
           aria-label={open ? 'Close menu' : 'Open menu'}
           aria-expanded={open}
-          className="flex h-11 w-11 items-center justify-center rounded-full border border-line bg-white lg:hidden"
+          className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-line bg-white xl:hidden"
         >
           <span className="relative block h-3.5 w-5">
             <span
@@ -113,7 +113,7 @@ export default function Navbar() {
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
             transition={{ duration: 0.32, ease: [0.22, 1, 0.36, 1] }}
-            className="overflow-hidden border-t border-line bg-white lg:hidden"
+            className="overflow-hidden border-t border-line bg-white xl:hidden"
           >
             <div className="container-x flex flex-col gap-1 py-5">
               {NAV.map((item, i) => (

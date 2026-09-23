@@ -123,14 +123,14 @@ export function DigitalProductsMegaMenu() {
         aria-expanded={open}
         aria-controls={menuId}
         onClick={() => (open ? setOpen(false) : openNow())}
-        className={`relative flex items-center gap-1 rounded-full px-4 py-2 text-sm font-bold transition-colors ${
+        className={`relative flex shrink-0 items-center gap-1 whitespace-nowrap rounded-full px-4 py-2 text-sm font-bold leading-none transition-colors ${
           active || open ? 'text-teal-600' : 'text-navy/70 hover:text-navy'
         }`}
       >
         Digital Products
         <Icon
           name="chevron"
-          className={`h-3.5 w-3.5 transition-transform duration-300 ${open ? 'rotate-180' : ''}`}
+          className={`h-3.5 w-3.5 shrink-0 transition-transform duration-300 ${open ? 'rotate-180' : ''}`}
           strokeWidth={2.4}
         />
         {(active || open) && (

@@ -6,6 +6,7 @@ import { SITE } from '@/lib/content';
 export default function CTA({
   title = 'Let us audit your digital presence — free.',
   body = 'A short call, then a written audit of your social media, website, ads and follow-up process. You keep the audit whether you work with us or not.',
+  ctaLabel = 'Book the free audit',
 }) {
   return (
     <section className="py-10 lg:py-14">
@@ -25,7 +26,7 @@ export default function CTA({
 
               <div className="mt-9 flex flex-col justify-center gap-3 sm:flex-row">
                 <Link href="/contact/" className="btn-teal">
-                  Book the free audit
+                  {ctaLabel}
                   <Icon name="arrow" className="h-4 w-4" />
                 </Link>
                 <a
