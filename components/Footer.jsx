@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import Logo from './Logo';
 import Icon from './Icon';
+import TrackedLink from './TrackedLink';
 import { SITE, SERVICES, NAV } from '@/lib/content';
 
 export default function Footer() {
@@ -16,10 +17,15 @@ export default function Footer() {
               {SITE.promise} We build and manage the complete digital ecosystem for
               growth-focused businesses across Delhi NCR.
             </p>
-            <Link href="/contact/" className="btn-teal mt-7 text-[13px]">
+            <TrackedLink
+              href="/contact/"
+              event="consultation_click"
+              eventParams={{ link_location: 'footer' }}
+              className="btn-teal mt-7 text-[13px]"
+            >
               Book a free digital audit
               <Icon name="arrow" className="h-4 w-4" />
-            </Link>
+            </TrackedLink>
           </div>
 
           <div>
@@ -94,15 +100,25 @@ export default function Footer() {
               </li>
               <li className="flex items-start gap-3">
                 <Icon name="mail" className="mt-0.5 h-4 w-4 shrink-0 text-teal-400" />
-                <a href={`mailto:${SITE.email}`} className="link-underline hover:text-white">
+                <TrackedLink
+                  href={`mailto:${SITE.email}`}
+                  event="email_click"
+                  eventParams={{ link_location: 'footer' }}
+                  className="link-underline hover:text-white"
+                >
                   {SITE.email}
-                </a>
+                </TrackedLink>
               </li>
               <li className="flex items-start gap-3">
                 <Icon name="phone" className="mt-0.5 h-4 w-4 shrink-0 text-teal-400" />
-                <a href={`tel:${SITE.phone.replace(/\s/g, '')}`} className="link-underline hover:text-white">
+                <TrackedLink
+                  href={`tel:${SITE.phone.replace(/\s/g, '')}`}
+                  event="phone_click"
+                  eventParams={{ link_location: 'footer' }}
+                  className="link-underline hover:text-white"
+                >
                   {SITE.phone}
-                </a>
+                </TrackedLink>
               </li>
             </ul>
           </div>

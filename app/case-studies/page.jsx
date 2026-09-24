@@ -1,8 +1,8 @@
-import Link from 'next/link';
 import PageHeader from '@/components/PageHeader';
 import Icon from '@/components/Icon';
 import Reveal, { Stagger, StaggerItem } from '@/components/Reveal';
 import CTA from '@/components/CTA';
+import TrackedLink from '@/components/TrackedLink';
 import { OG_IMAGE } from '@/lib/content';
 
 const OG_TITLE = 'Case Studies | Fenbrix';
@@ -79,10 +79,15 @@ export default function CaseStudiesPage() {
                   permission to document the work properly.
                 </p>
               </div>
-              <Link href="/contact/" className="btn-primary shrink-0">
+              <TrackedLink
+                href="/contact/"
+                event="consultation_click"
+                eventParams={{ link_location: 'case_studies_page' }}
+                className="btn-primary shrink-0"
+              >
                 Talk to us
                 <Icon name="arrow" className="h-4 w-4" />
-              </Link>
+              </TrackedLink>
             </div>
           </Reveal>
         </div>

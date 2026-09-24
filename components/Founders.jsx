@@ -1,5 +1,6 @@
 import Icon from './Icon';
 import Reveal, { Stagger, StaggerItem } from './Reveal';
+import TrackedLink from './TrackedLink';
 import { FOUNDERS } from '@/lib/content';
 import { getExpertiseTheme } from './founderTheme';
 
@@ -280,9 +281,14 @@ function FounderCard({ person, reverse = false }) {
             {person.email && (
               <div className="flex items-center gap-2 text-sm">
                 <Icon name="mail" className="h-4 w-4 text-teal-400" />
-                <a href={`mailto:${person.email}`} className="link-underline font-semibold text-white/80 hover:text-white">
+                <TrackedLink
+                  href={`mailto:${person.email}`}
+                  event="email_click"
+                  eventParams={{ link_location: 'founder_card' }}
+                  className="link-underline font-semibold text-white/80 hover:text-white"
+                >
                   {person.email}
-                </a>
+                </TrackedLink>
                 {person.emailIsPlaceholder && (
                   <span className="text-xs italic text-white/35">(placeholder — not live yet)</span>
                 )}

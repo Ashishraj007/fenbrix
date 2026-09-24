@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import Icon from './Icon';
+import TrackedLink from './TrackedLink';
 import { getProductWhatsAppUrl } from '@/lib/whatsapp';
 
 export default function ProductCard({ product }) {
@@ -56,15 +57,17 @@ export default function ProductCard({ product }) {
         )}
       </div>
 
-      <a
+      <TrackedLink
         href={getProductWhatsAppUrl(product.name, selected)}
+        event="whatsapp_click"
+        eventParams={{ link_location: 'product_card', product: product.name }}
         target="_blank"
         rel="noopener noreferrer"
         className="btn-teal mt-6 w-full text-[13px]"
       >
         Get Product
         <Icon name="arrow" className="h-4 w-4" />
-      </a>
+      </TrackedLink>
     </div>
   );
 }

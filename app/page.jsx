@@ -5,6 +5,7 @@ import Reveal, { Stagger, StaggerItem } from '@/components/Reveal';
 import Marquee from '@/components/Marquee';
 import BeforeAfterFlow from '@/components/BeforeAfterFlow';
 import CTA from '@/components/CTA';
+import TrackedLink from '@/components/TrackedLink';
 import { SERVICES, STATS, DIFFERENTIATORS, PROCESS, PACKAGES, INDUSTRIES } from '@/lib/content';
 
 export const metadata = {
@@ -253,12 +254,14 @@ export default function HomePage() {
                       </li>
                     ))}
                   </ul>
-                  <Link
+                  <TrackedLink
                     href="/contact/"
+                    event="get_quote_click"
+                    eventParams={{ package: p.name, link_location: 'homepage_pricing' }}
                     className={`mt-7 w-full ${p.featured ? 'btn-teal' : 'btn-ghost'}`}
                   >
                     Enquire about {p.name}
-                  </Link>
+                  </TrackedLink>
                 </div>
               </StaggerItem>
             ))}

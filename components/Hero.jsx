@@ -3,6 +3,7 @@
 import Link from 'next/link';
 import { motion } from 'framer-motion';
 import Icon from './Icon';
+import TrackedLink from './TrackedLink';
 import { LogoMark } from './Logo';
 
 const NODES = [
@@ -134,10 +135,15 @@ export default function Hero() {
             transition={{ duration: 0.7, delay: 0.34 }}
             className="mt-9 flex flex-col gap-3 sm:flex-row"
           >
-            <Link href="/contact/" className="btn-teal">
+            <TrackedLink
+              href="/contact/"
+              event="consultation_click"
+              eventParams={{ link_location: 'homepage_hero' }}
+              className="btn-teal"
+            >
               Get a free digital audit
               <Icon name="arrow" className="h-4 w-4" />
-            </Link>
+            </TrackedLink>
             <Link href="/services/" className="btn-ghost-dark">
               Explore services
             </Link>

@@ -2,6 +2,7 @@ import PageHeader from '@/components/PageHeader';
 import Icon from '@/components/Icon';
 import Reveal from '@/components/Reveal';
 import ContactForm from '@/components/ContactForm';
+import TrackedLink from '@/components/TrackedLink';
 import { SITE, OG_IMAGE } from '@/lib/content';
 
 const OG_TITLE = 'Contact | Fenbrix';
@@ -49,20 +50,24 @@ export default function ContactPage() {
             </ol>
 
             <div className="mt-10 space-y-3 border-t border-line pt-8">
-              <a
+              <TrackedLink
                 href={`mailto:${SITE.email}`}
+                event="email_click"
+                eventParams={{ link_location: 'contact_page' }}
                 className="flex items-center gap-3 text-sm font-semibold text-navy/70 transition-colors hover:text-teal-600"
               >
                 <Icon name="mail" className="h-4 w-4 text-teal-600" />
                 {SITE.email}
-              </a>
-              <a
+              </TrackedLink>
+              <TrackedLink
                 href={`tel:${SITE.phone.replace(/\s/g, '')}`}
+                event="phone_click"
+                eventParams={{ link_location: 'contact_page' }}
                 className="flex items-center gap-3 text-sm font-semibold text-navy/70 transition-colors hover:text-teal-600"
               >
                 <Icon name="phone" className="h-4 w-4 text-teal-600" />
                 {SITE.phone}
-              </a>
+              </TrackedLink>
               <p className="flex items-center gap-3 text-sm font-semibold text-navy/70">
                 <Icon name="pin" className="h-4 w-4 text-teal-600" />
                 {SITE.city}

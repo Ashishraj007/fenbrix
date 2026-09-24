@@ -1,6 +1,6 @@
-import Link from 'next/link';
 import Icon from './Icon';
 import Reveal from './Reveal';
+import TrackedLink from './TrackedLink';
 import { SITE } from '@/lib/content';
 
 export default function CTA({
@@ -25,19 +25,26 @@ export default function CTA({
               <p className="mt-5 text-base leading-relaxed text-white/60">{body}</p>
 
               <div className="mt-9 flex flex-col justify-center gap-3 sm:flex-row">
-                <Link href="/contact/" className="btn-teal">
+                <TrackedLink
+                  href="/contact/"
+                  event="consultation_click"
+                  eventParams={{ link_location: 'shared_cta' }}
+                  className="btn-teal"
+                >
                   {ctaLabel}
                   <Icon name="arrow" className="h-4 w-4" />
-                </Link>
-                <a
+                </TrackedLink>
+                <TrackedLink
                   href={`https://wa.me/${SITE.whatsapp}`}
+                  event="whatsapp_click"
+                  eventParams={{ link_location: 'shared_cta' }}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="btn-ghost-dark"
                 >
                   <Icon name="wa" className="h-4 w-4" />
                   Chat on WhatsApp
-                </a>
+                </TrackedLink>
               </div>
             </div>
           </div>

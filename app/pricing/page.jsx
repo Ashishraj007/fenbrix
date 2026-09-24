@@ -4,6 +4,7 @@ import Icon from '@/components/Icon';
 import Reveal, { Stagger, StaggerItem } from '@/components/Reveal';
 import Faq from '@/components/Faq';
 import CTA from '@/components/CTA';
+import TrackedLink from '@/components/TrackedLink';
 import { PACKAGES, PROJECT_PRICING, FAQS, OG_IMAGE } from '@/lib/content';
 
 const OG_TITLE = 'Pricing | Fenbrix';
@@ -68,9 +69,14 @@ export default function PricingPage() {
                       </li>
                     ))}
                   </ul>
-                  <Link href="/contact/" className={`mt-7 w-full ${p.featured ? 'btn-teal' : 'btn-ghost'}`}>
+                  <TrackedLink
+                    href="/contact/"
+                    event="get_quote_click"
+                    eventParams={{ package: p.name, link_location: 'pricing_page' }}
+                    className={`mt-7 w-full ${p.featured ? 'btn-teal' : 'btn-ghost'}`}
+                  >
                     Enquire about {p.name}
-                  </Link>
+                  </TrackedLink>
                 </div>
               </StaggerItem>
             ))}

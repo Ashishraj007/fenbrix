@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
 import Icon from './Icon';
+import { trackEvent } from '@/lib/gtag';
 import { SITE, SERVICES } from '@/lib/content';
 
 const BUDGETS = ['Under ₹25,000/mo', '₹25,000 – ₹60,000/mo', '₹60,000 – ₹1,50,000/mo', 'Project only'];
@@ -37,10 +38,15 @@ export default function ContactForm() {
 
   const valid = form.name.trim() && (form.phone.trim() || form.email.trim());
 
+  // contact_form_submit fires only here — after validation passes and the
+  // hand-off action actually runs — never on a bare button click. Only the
+  // selected service category is sent (a catalog label, not personal data);
+  // name, phone, email, business and message are never sent to GA4.
   const sendWhatsApp = () => {
     if (!valid) return;
     window.open(`https://wa.me/${SITE.whatsapp}?text=${encodeURIComponent(summary())}`, '_blank');
     setSent(true);
+    trackEvent('contact_form_submit', { method: 'whatsapp', service: form.service || undefined });
   };
 
   const sendEmail = () => {
@@ -49,6 +55,7 @@ export default function ContactForm() {
       `mailto:${SITE.email}?subject=${encodeURIComponent('Website enquiry — ' + (form.business || form.name))}` +
       `&body=${encodeURIComponent(summary())}`;
     setSent(true);
+    trackEvent('contact_form_submit', { method: 'email', service: form.service || undefined });
   };
 
   return (

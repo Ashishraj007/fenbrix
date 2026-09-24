@@ -6,6 +6,7 @@ import CTA from '@/components/CTA';
 import Faq from '@/components/Faq';
 import Reveal from '@/components/Reveal';
 import JsonLd from '@/components/JsonLd';
+import TrackedLink from '@/components/TrackedLink';
 import { TOOLS, TOOL_CATEGORIES } from '@/lib/tools';
 import { OG_IMAGE } from '@/lib/content';
 
@@ -192,9 +193,14 @@ export default function ToolsPage() {
                 Take a look at our services
               </Link>{' '}
               or{' '}
-              <Link href="/contact/" className="link-underline font-semibold text-teal-600">
+              <TrackedLink
+                href="/contact/"
+                event="consultation_click"
+                eventParams={{ link_location: 'tools_page_seo' }}
+                className="link-underline font-semibold text-teal-600"
+              >
                 get in touch
-              </Link>{' '}
+              </TrackedLink>{' '}
               to talk through what you need.
             </p>
           </Reveal>

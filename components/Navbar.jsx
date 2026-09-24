@@ -6,6 +6,7 @@ import { useEffect, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import Logo from './Logo';
 import Icon from './Icon';
+import TrackedLink from './TrackedLink';
 import { ServicesMegaMenu, ServicesAccordion } from './ServicesMegaMenu';
 import { DigitalProductsMegaMenu, DigitalProductsAccordion } from './DigitalProductsMegaMenu';
 import { NAV } from '@/lib/content';
@@ -73,10 +74,15 @@ export default function Navbar() {
         </div>
 
         <div className="hidden shrink-0 items-center gap-3 xl:flex">
-          <Link href="/contact/" className="btn-primary shrink-0 whitespace-nowrap text-[13px]">
+          <TrackedLink
+            href="/contact/"
+            event="consultation_click"
+            eventParams={{ link_location: 'navbar_desktop' }}
+            className="btn-primary shrink-0 whitespace-nowrap text-[13px]"
+          >
             Get a free audit
             <Icon name="arrow" className="h-4 w-4" />
-          </Link>
+          </TrackedLink>
         </div>
 
         <button
@@ -137,10 +143,15 @@ export default function Navbar() {
                   )}
                 </motion.div>
               ))}
-              <Link href="/contact/" className="btn-primary mt-3 w-full">
+              <TrackedLink
+                href="/contact/"
+                event="consultation_click"
+                eventParams={{ link_location: 'navbar_mobile' }}
+                className="btn-primary mt-3 w-full"
+              >
                 Get a free audit
                 <Icon name="arrow" className="h-4 w-4" />
-              </Link>
+              </TrackedLink>
             </div>
           </motion.div>
         )}

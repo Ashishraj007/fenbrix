@@ -3,6 +3,7 @@ import Icon from './Icon';
 import Faq from './Faq';
 import Reveal, { Stagger, StaggerItem } from './Reveal';
 import CTA from './CTA';
+import TrackedLink from './TrackedLink';
 import { SERVICES } from '@/lib/content';
 
 function SectionIntro({ eyebrow, title, body }) {
@@ -29,7 +30,14 @@ export default function ServiceDetail({ service, detail }) {
             <h1 className="h1 mt-4 max-w-3xl text-white">{detail.hero}</h1>
             <p className="mt-6 max-w-2xl text-base leading-relaxed text-white/65 sm:text-lg">{detail.intro}</p>
             <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-              <Link href="/contact/" className="btn-teal">Get a free audit <Icon name="arrow" className="h-4 w-4" /></Link>
+              <TrackedLink
+                href="/contact/"
+                event="service_inquiry_click"
+                eventParams={{ service: service.title }}
+                className="btn-teal"
+              >
+                Get a free audit <Icon name="arrow" className="h-4 w-4" />
+              </TrackedLink>
               <Link href="/process/" className="btn-ghost-dark">See how we work <Icon name="arrow" className="h-4 w-4" /></Link>
             </div>
           </Reveal>

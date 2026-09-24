@@ -3,6 +3,7 @@ import Icon from './Icon';
 import Faq from './Faq';
 import Reveal, { Stagger, StaggerItem } from './Reveal';
 import CTA from './CTA';
+import TrackedLink from './TrackedLink';
 import { SERVICES } from '@/lib/content';
 
 export default function LocationDetail({ location }) {
@@ -17,7 +18,14 @@ export default function LocationDetail({ location }) {
             <h1 className="h1 mt-4 text-white">{location.hero}</h1>
             <p className="mt-6 max-w-2xl text-base leading-relaxed text-white/65 sm:text-lg">{location.intro}</p>
             <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-              <Link href="/contact/" className="btn-teal">Get a free digital audit <Icon name="arrow" className="h-4 w-4" /></Link>
+              <TrackedLink
+                href="/contact/"
+                event="consultation_click"
+                eventParams={{ link_location: 'location_page', location: location.name }}
+                className="btn-teal"
+              >
+                Get a free digital audit <Icon name="arrow" className="h-4 w-4" />
+              </TrackedLink>
               <Link href="/services/" className="btn-ghost-dark">Explore services <Icon name="arrow" className="h-4 w-4" /></Link>
             </div>
           </Reveal>
