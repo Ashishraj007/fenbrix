@@ -1,142 +1,37 @@
 import Icon from './Icon';
 import Reveal, { Stagger, StaggerItem } from './Reveal';
 import TrackedLink from './TrackedLink';
+import { LogoMark } from './Logo';
 import { FOUNDERS } from '@/lib/content';
 import { getExpertiseTheme } from './founderTheme';
 
-// Purely decorative section content — a "what Fenbrix builds" showcase, not
-// founder-specific bio data, so it lives here rather than in lib/content.js.
-const SHOWCASE_BADGES = [
-  { label: 'Website Developer', icon: 'browser', color: 'purple', className: 'left-0 top-0' },
-  { label: 'Frontend Developer', icon: 'code', color: 'emerald', className: 'right-0 top-2 sm:top-4' },
-  { label: 'Next.js Developer', icon: 'box', color: 'blue', className: 'left-0 top-1/2 -translate-y-1/2' },
-  { label: 'Web & App Development', icon: 'phone', color: 'orange', className: 'right-0 top-[74%] -translate-y-1/2' },
-  { label: 'SEO & Performance', icon: 'chart', color: 'rose', className: 'left-2 bottom-0 sm:left-4' },
-  { label: 'Digital Solutions', icon: 'megaphone', color: 'cyan', className: 'right-2 bottom-0 sm:right-4' },
-];
-
-const SHOWCASE_STATS = [
-  { icon: 'code', line1: 'Modern', line2: 'Web Solutions' },
-  { icon: 'rocket', line1: 'Scalable', line2: 'Products' },
-  { icon: 'trend', line1: 'Better', line2: 'Online Presence' },
-];
-
-function ShowcaseBadge({ badge }) {
-  const theme = getExpertiseTheme(badge.color);
+// "The Fenbrix vision" card — sits where a founder photo would, at the same
+// aspect ratio, so the profile card keeps its size. Typography, glow and a
+// faint monogram only; no image or avatar of any kind.
+function VisionCard() {
   return (
-    <span
-      aria-hidden="true"
-      className={`absolute flex animate-float items-center gap-1.5 rounded-lg border border-white/10 bg-navy-700/85 py-1.5 pl-1.5 pr-2.5 text-[10px] font-bold text-white/85 shadow-lift backdrop-blur-md sm:gap-2 sm:rounded-xl sm:py-2 sm:pl-2 sm:pr-3 sm:text-[11px] ${badge.className}`}
-    >
-      <span className={`flex h-5 w-5 shrink-0 items-center justify-center rounded-md text-white sm:h-6 sm:w-6 ${theme.iconBg}`}>
-        <Icon name={badge.icon} className="h-3 w-3 sm:h-3.5 sm:w-3.5" strokeWidth={2} />
+    <div className="relative aspect-[4/5] overflow-hidden rounded-[22px] border border-white/10 bg-gradient-to-br from-navy-900/90 via-navy-800/80 to-navy-600/60 lg:aspect-[5/6]">
+      <span className="pointer-events-none absolute -left-16 -top-16 h-56 w-56 rounded-full bg-teal-400/20 blur-3xl" aria-hidden="true" />
+      <span className="pointer-events-none absolute -bottom-20 -right-16 h-64 w-64 rounded-full bg-purple-500/15 blur-3xl" aria-hidden="true" />
+      <span className="pointer-events-none absolute inset-0 dot-grid opacity-[0.06]" aria-hidden="true" />
+      <span className="pointer-events-none absolute -right-14 -top-10 opacity-[0.06]" aria-hidden="true">
+        <LogoMark className="h-64 w-64 sm:h-72 sm:w-72" variant="white" id="fx-vision-bg" />
       </span>
-      <span className="whitespace-nowrap">{badge.label}</span>
-    </span>
-  );
-}
 
-// Central abstract technology illustration — a stylised laptop with code
-// lines and a floating preview card. Built entirely from CSS shapes, no
-// image asset of any kind.
-function TechVisual() {
-  return (
-    <div className="relative h-32 w-52 sm:h-36 sm:w-60" aria-hidden="true">
-      <div className="pointer-events-none absolute -bottom-6 left-1/2 h-8 w-40 -translate-x-1/2 rounded-full bg-teal-400/30 blur-2xl" />
-
-      <div className="absolute inset-x-0 top-0 h-[6.5rem] rounded-xl border border-white/15 bg-navy-900/80 p-2.5 shadow-lift sm:h-[7.5rem]">
-        <div className="flex gap-1">
-          <span className="h-1.5 w-1.5 rounded-full bg-rose-400/70" />
-          <span className="h-1.5 w-1.5 rounded-full bg-amber-400/70" />
-          <span className="h-1.5 w-1.5 rounded-full bg-emerald-400/70" />
-        </div>
-        <div className="mt-2.5 space-y-1.5">
-          <span className="block h-1.5 w-3/4 rounded-full bg-blue-400/50" />
-          <span className="block h-1.5 w-1/2 rounded-full bg-purple-400/50" />
-          <span className="block h-1.5 w-5/6 rounded-full bg-teal-400/50" />
-          <span className="block h-1.5 w-2/3 rounded-full bg-blue-400/30" />
+      <div className="relative flex h-full flex-col justify-between p-6 sm:p-8">
+        <div className="flex items-center gap-3">
+          <LogoMark className="h-9 w-9 shrink-0" variant="gradient" id="fx-vision" />
+          <p className="text-[11px] font-extrabold uppercase tracking-[0.22em] text-teal-400">The Fenbrix Vision</p>
         </div>
 
-        <div className="absolute -bottom-5 -right-5 flex h-14 w-20 flex-col gap-1 rounded-lg border border-white/15 bg-white p-1.5 shadow-lift">
-          <span className="h-4 w-full rounded bg-gradient-to-br from-teal-400 to-blue-500" />
-          <span className="h-1 w-3/4 rounded-full bg-navy/15" />
-          <span className="h-1 w-1/2 rounded-full bg-navy/15" />
-        </div>
-      </div>
-
-      <div className="absolute inset-x-3 bottom-0 h-2.5 rounded-b-md bg-gradient-to-b from-white/15 to-white/5" />
-    </div>
-  );
-}
-
-// Full "what Fenbrix builds" showcase card — replaces the old founder
-// photo/identity card. No image, avatar or stock photo of any kind; every
-// zone (header, central visual, floating badges, bottom strip) is filled
-// with typography, CSS shapes and icons so no area is left empty.
-function ShowcaseCard() {
-  return (
-    <div className="relative mx-auto max-w-[440px] lg:max-w-none">
-      <div className="pointer-events-none absolute -left-10 -top-10 h-52 w-52 animate-float rounded-full bg-teal-400/20 blur-3xl" aria-hidden="true" />
-      <div
-        className="pointer-events-none absolute -bottom-14 -right-8 h-56 w-56 animate-float rounded-full bg-purple-500/20 blur-3xl"
-        style={{ animationDelay: '1.4s' }}
-        aria-hidden="true"
-      />
-      <div
-        className="pointer-events-none absolute right-1/4 top-1/3 h-28 w-28 animate-float rounded-full bg-blue-500/15 blur-3xl"
-        style={{ animationDelay: '2.2s' }}
-        aria-hidden="true"
-      />
-
-      <div className="relative overflow-hidden rounded-[28px] border border-white/10 bg-white/[0.04] p-6 shadow-lift backdrop-blur-xl sm:p-8">
-        <span className="pointer-events-none absolute inset-0 dot-grid opacity-[0.08]" aria-hidden="true" />
-        <span
-          className="pointer-events-none absolute -inset-px bg-gradient-to-br from-teal-400/10 via-transparent to-purple-500/10"
-          aria-hidden="true"
-        />
-
-        <div className="relative">
-          <p className="text-[11px] font-extrabold uppercase tracking-[0.22em] text-teal-400">
-            Building Digital Solutions
+        <div>
+          <span className="block h-px w-12 bg-gradient-to-r from-teal-400 to-transparent" aria-hidden="true" />
+          <p className="mt-5 text-[1.75rem] font-extrabold leading-[1.12] tracking-tight text-white sm:text-4xl lg:text-[2rem] xl:text-4xl">
+            Building ideas that create <span className="text-teal-400">real impact.</span>
           </p>
-          <div className="mt-3 text-[2rem] font-extrabold leading-[1.08] tracking-tight text-white sm:text-4xl">
-            <p>Websites.</p>
-            <p>Products.</p>
-            <p className="text-teal-400">Growth.</p>
-          </div>
-          <p className="mt-3 text-[13px] leading-relaxed text-white/50">
-            Design &bull; Develop &bull; Automate
-            <br />
-            Create &bull; Grow
+          <p className="mt-4 max-w-sm text-[14px] leading-relaxed text-white/60 sm:text-[15px]">
+            Turning ideas into practical digital products and technology that create meaningful impact.
           </p>
-        </div>
-
-        {/* ---- central visual + floating badges ---- */}
-        <div className="relative mt-8 flex h-[290px] items-center justify-center sm:h-[320px]">
-          <span className="pointer-events-none absolute h-40 w-40 rounded-full border border-teal-400/20" aria-hidden="true" />
-          <span className="pointer-events-none absolute h-56 w-56 rounded-full border border-white/[0.06]" aria-hidden="true" />
-
-          <svg className="pointer-events-none absolute inset-0 h-full w-full overflow-visible text-teal-400/25" aria-hidden="true">
-            <path d="M60 40 C 100 60, 120 90, 150 130" fill="none" stroke="currentColor" strokeWidth="1.2" strokeDasharray="2 6" strokeLinecap="round" />
-            <path d="M320 60 C 280 90, 260 110, 230 140" fill="none" stroke="currentColor" strokeWidth="1.2" strokeDasharray="2 6" strokeLinecap="round" />
-          </svg>
-
-          <TechVisual />
-
-          {SHOWCASE_BADGES.map((badge) => (
-            <ShowcaseBadge key={badge.label} badge={badge} />
-          ))}
-        </div>
-
-        {/* ---- bottom stats strip ---- */}
-        <div className="relative mt-6 grid grid-cols-3 divide-x divide-white/10 rounded-2xl border border-white/10 bg-white/5 py-4">
-          {SHOWCASE_STATS.map((stat) => (
-            <div key={stat.line1} className="flex flex-col items-center gap-1.5 px-1 text-center sm:px-2">
-              <Icon name={stat.icon} className="h-4 w-4 text-teal-400" strokeWidth={1.9} aria-hidden="true" />
-              <p className="text-[11px] font-extrabold leading-tight text-white sm:text-[12px]">{stat.line1}</p>
-              <p className="text-[10px] leading-tight text-white/45 sm:text-[11px]">{stat.line2}</p>
-            </div>
-          ))}
         </div>
       </div>
     </div>
@@ -185,18 +80,110 @@ function SocialLink({ href, icon, label }) {
   );
 }
 
+function FounderConnect({ person }) {
+  if (!person.instagram && !person.linkedin && !person.email) return null;
+  return (
+    <div className="flex flex-wrap items-center gap-x-4 gap-y-3">
+      {(person.instagram || person.linkedin) && (
+        <div className="flex items-center gap-2.5">
+          {person.instagram && (
+            <SocialLink href={person.instagram} icon="instagram" label={`${person.name} on Instagram`} />
+          )}
+          {person.linkedin && (
+            <SocialLink href={person.linkedin} icon="linkedin" label={`${person.name} on LinkedIn`} />
+          )}
+        </div>
+      )}
+      {person.email && (
+        <div className="flex min-w-0 items-center gap-2 text-sm">
+          <Icon name="mail" className="h-4 w-4 shrink-0 text-teal-400" />
+          <TrackedLink
+            href={`mailto:${person.email}`}
+            event="email_click"
+            eventParams={{ link_location: 'founder_card' }}
+            className="link-underline min-w-0 break-all font-semibold text-white/80 hover:text-white"
+          >
+            {person.email}
+          </TrackedLink>
+          {person.emailIsPlaceholder && (
+            <span className="text-xs italic text-white/35">(placeholder — not live yet)</span>
+          )}
+        </div>
+      )}
+    </div>
+  );
+}
+
+// Founder vision + identity card. Vision card over details on mobile and desktop;
+// side by side on tablet, where the whole section is a single column.
+function FounderProfile({ person }) {
+  return (
+    <div className="relative">
+      <div className="pointer-events-none absolute -left-10 -top-10 h-52 w-52 animate-float rounded-full bg-teal-400/20 blur-3xl" aria-hidden="true" />
+      <div
+        className="pointer-events-none absolute -bottom-12 -right-8 h-56 w-56 animate-float rounded-full bg-purple-500/20 blur-3xl"
+        style={{ animationDelay: '1.4s' }}
+        aria-hidden="true"
+      />
+
+      <div className="relative overflow-hidden rounded-[28px] border border-white/10 bg-white/[0.04] p-3 shadow-lift backdrop-blur-xl md:grid md:grid-cols-[minmax(0,1fr)_minmax(0,1.1fr)] md:items-center md:gap-4 lg:block">
+        <span className="pointer-events-none absolute inset-0 dot-grid opacity-[0.08]" aria-hidden="true" />
+        <span
+          className="pointer-events-none absolute -inset-px bg-gradient-to-br from-teal-400/10 via-transparent to-purple-500/10"
+          aria-hidden="true"
+        />
+
+        <VisionCard />
+
+        <div className="relative px-2 pb-2 pt-5 sm:px-3 md:py-4 lg:px-3 lg:pb-3 lg:pt-5">
+          <div className="flex flex-wrap items-end justify-between gap-x-4 gap-y-1">
+            <div className="flex items-center gap-3">
+              <LogoMark className="h-10 w-10 shrink-0 rounded-xl shadow-soft" variant="gradient" id="fx-founder" />
+              <div>
+                <h3 className="text-2xl font-extrabold leading-tight text-white">{person.name}</h3>
+                <p className="mt-0.5 text-[13px] font-bold text-teal-400">{person.role || person.title}</p>
+              </div>
+            </div>
+            {person.location && (
+              <p className="flex items-center gap-1.5 pb-0.5 text-[13px] font-semibold text-white/55">
+                <Icon name="pin" className="h-3.5 w-3.5 text-teal-400" strokeWidth={2} />
+                Based in {person.location}
+              </p>
+            )}
+          </div>
+
+          {person.focus?.length > 0 && (
+            <ul className="mt-4 flex flex-wrap gap-2" aria-label="Focus areas">
+              {person.focus.map((f) => (
+                <li
+                  key={f}
+                  className="rounded-full border border-white/10 bg-white/5 px-3 py-1 text-[12px] font-bold text-white/75"
+                >
+                  {f}
+                </li>
+              ))}
+            </ul>
+          )}
+
+          <div className="mt-5 border-t border-white/10 pt-5">
+            <FounderConnect person={person} />
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 function FounderCard({ person, reverse = false }) {
+  const [lead, highlight] = person.tagline || [person.name, ''];
   return (
     <div
-      className={`grid items-start gap-12 lg:grid-cols-[1fr_1.05fr] lg:gap-14 ${
+      className={`grid items-start gap-12 lg:grid-cols-[minmax(0,0.92fr)_minmax(0,1.08fr)] lg:gap-14 xl:gap-16 ${
         reverse ? 'lg:[&>*:first-child]:order-2' : ''
       }`}
     >
+      {/* ---- Founder: who, why, and the person behind it ---- */}
       <Reveal direction={reverse ? 'left' : 'right'}>
-        <ShowcaseCard />
-      </Reveal>
-
-      <Reveal direction={reverse ? 'right' : 'left'} delay={0.1}>
         <div className="flex items-center gap-3">
           <span className="inline-flex items-center gap-2 rounded-full border border-teal-400/30 bg-teal-400/5 px-4 py-1.5 text-[11px] font-extrabold uppercase tracking-[0.18em] text-teal-400">
             <Icon name="people" className="h-3.5 w-3.5" strokeWidth={2} />
@@ -205,15 +192,34 @@ function FounderCard({ person, reverse = false }) {
           <span className="hidden h-px max-w-[100px] flex-1 bg-gradient-to-r from-teal-400/50 to-transparent sm:block" aria-hidden="true" />
         </div>
 
-        <h2 className="h2 mt-5 text-white">{person.name}</h2>
-        <p className="text-gradient mt-1 text-xl font-extrabold sm:text-2xl">{person.title}</p>
+        <h2 className="h2 mt-5 text-white">
+          {lead} {highlight && <span className="text-teal-400">{highlight}</span>}
+        </h2>
+
+        {person.summary && (
+          <p className="mt-5 max-w-xl text-[16px] leading-relaxed text-white/70 sm:text-[17px]">{person.summary}</p>
+        )}
+
+        <div className="mt-9 lg:mt-10">
+          <FounderProfile person={person} />
+        </div>
+      </Reveal>
+
+      {/* ---- Vision, then experience ---- */}
+      <Reveal direction={reverse ? 'right' : 'left'} delay={0.1} className="lg:pt-2">
+        {(person.intro || person.bio?.length > 0) && (
+          <div className="flex items-center gap-2">
+            <Icon name="sparkle" className="h-4 w-4 text-teal-400" />
+            <h3 className="text-[11px] font-extrabold uppercase tracking-[0.18em] text-teal-400">The story</h3>
+          </div>
+        )}
 
         {person.intro && (
-          <p className="mt-5 text-lg font-semibold italic leading-relaxed text-white/80">{person.intro}</p>
+          <p className="mt-4 text-lg font-semibold italic leading-relaxed text-white/85 sm:text-xl">{person.intro}</p>
         )}
 
         {person.bio?.length > 0 && (
-          <div className="mt-7 space-y-4 text-[15px] leading-relaxed text-white/65">
+          <div className="mt-5 space-y-4 text-[15px] leading-relaxed text-white/65">
             {person.bio.map((segments, i) => (
               <BioParagraph key={i} segments={segments} />
             ))}
@@ -221,7 +227,7 @@ function FounderCard({ person, reverse = false }) {
         )}
 
         {person.statement && (
-          <blockquote className="relative mt-8 overflow-hidden rounded-2xl border border-teal-400/20 bg-teal-400/5 p-6">
+          <blockquote className="relative mt-8 overflow-hidden rounded-2xl border border-teal-400/20 bg-teal-400/5 p-5 sm:p-6">
             <span aria-hidden="true" className="absolute -top-3 left-5 font-serif text-5xl leading-none text-teal-400/30">
               &ldquo;
             </span>
@@ -232,7 +238,7 @@ function FounderCard({ person, reverse = false }) {
         )}
 
         {person.expertise?.length > 0 && (
-          <div className="mt-10">
+          <div className="mt-10 lg:mt-12">
             <div className="flex items-center gap-2">
               <Icon name="bolt" className="h-4 w-4 text-teal-400" />
               <h3 className="text-[11px] font-extrabold uppercase tracking-[0.18em] text-teal-400">
@@ -240,60 +246,36 @@ function FounderCard({ person, reverse = false }) {
               </h3>
             </div>
 
-            <Stagger className="mt-5 grid gap-4 sm:grid-cols-2 lg:grid-cols-3" gap={0.06}>
+            {/* 1 col (compact rows) on small phones, 2 on larger phones, 3 from tablet up. */}
+            <Stagger
+              className="mt-5 grid gap-3 min-[420px]:grid-cols-2 sm:gap-4 md:grid-cols-3"
+              gap={0.06}
+            >
               {person.expertise.map((item) => {
                 const theme = getExpertiseTheme(item.color);
                 return (
                   <StaggerItem key={item.title}>
                     <div
-                      className={`group relative h-full overflow-hidden rounded-2xl border border-white/10 bg-white/[0.03] p-5 transition-all duration-300 hover:-translate-y-1 hover:shadow-lift ${theme.border}`}
+                      className={`group relative flex h-full items-center gap-4 overflow-hidden rounded-2xl border border-white/10 bg-white/[0.03] p-4 transition-all duration-300 hover:-translate-y-1 hover:shadow-lift min-[420px]:block min-[420px]:p-5 lg:p-4 xl:p-5 ${theme.border}`}
                     >
                       <span
                         aria-hidden="true"
                         className={`pointer-events-none absolute -right-8 -top-8 h-24 w-24 rounded-full opacity-0 blur-2xl transition-opacity duration-300 group-hover:opacity-100 ${theme.glow}`}
                       />
                       <span
-                        className={`relative flex h-11 w-11 items-center justify-center rounded-xl text-white shadow-soft transition-transform duration-300 group-hover:scale-105 ${theme.iconBg}`}
+                        className={`relative flex h-11 w-11 shrink-0 items-center justify-center rounded-xl text-white shadow-soft transition-transform duration-300 group-hover:scale-105 ${theme.iconBg}`}
                       >
                         <Icon name={item.icon} className="h-5 w-5" strokeWidth={1.8} />
                       </span>
-                      <h4 className="relative mt-4 text-[15px] font-extrabold text-white">{item.title}</h4>
-                      <p className="relative mt-1 text-[13px] text-white/50">{item.desc}</p>
+                      <div className="relative min-w-0">
+                        <h4 className="text-[15px] font-extrabold text-white min-[420px]:mt-4">{item.title}</h4>
+                        <p className="mt-1 text-[13px] text-white/50">{item.desc}</p>
+                      </div>
                     </div>
                   </StaggerItem>
                 );
               })}
             </Stagger>
-          </div>
-        )}
-
-        {(person.instagram || person.linkedin || person.email) && (
-          <div className="mt-10 flex flex-wrap items-center gap-4 border-t border-white/10 pt-7">
-            <span className="text-[13px] font-bold text-white/45">Connect with {person.name}</span>
-            <div className="flex items-center gap-3">
-              {person.instagram && (
-                <SocialLink href={person.instagram} icon="instagram" label={`${person.name} on Instagram`} />
-              )}
-              {person.linkedin && (
-                <SocialLink href={person.linkedin} icon="linkedin" label={`${person.name} on LinkedIn`} />
-              )}
-            </div>
-            {person.email && (
-              <div className="flex items-center gap-2 text-sm">
-                <Icon name="mail" className="h-4 w-4 text-teal-400" />
-                <TrackedLink
-                  href={`mailto:${person.email}`}
-                  event="email_click"
-                  eventParams={{ link_location: 'founder_card' }}
-                  className="link-underline font-semibold text-white/80 hover:text-white"
-                >
-                  {person.email}
-                </TrackedLink>
-                {person.emailIsPlaceholder && (
-                  <span className="text-xs italic text-white/35">(placeholder — not live yet)</span>
-                )}
-              </div>
-            )}
           </div>
         )}
       </Reveal>
@@ -303,7 +285,7 @@ function FounderCard({ person, reverse = false }) {
 
 export default function Founders({ people = FOUNDERS }) {
   return (
-    <section aria-label="Meet the Fenbrix founder" className="surface-dark relative overflow-hidden py-20 lg:py-24">
+    <section aria-label="Meet the Fenbrix founder" className="surface-dark relative overflow-hidden py-16 sm:py-20 lg:py-24">
       <span className="pointer-events-none absolute inset-0 dot-grid opacity-[0.03]" aria-hidden="true" />
       <div className="pointer-events-none absolute right-10 top-10 hidden lg:block" aria-hidden="true">
         <span className="text-[13px] italic leading-snug text-teal-400/60">

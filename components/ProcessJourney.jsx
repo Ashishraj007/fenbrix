@@ -80,38 +80,49 @@ function ProcessCard({ step, index, reduceMotion }) {
 
   return (
     <motion.div
-      data-card
       initial={reduceMotion ? { opacity: 1, y: 0 } : { opacity: 0, y: 22 }}
       animate={reduceMotion ? { opacity: 1, y: 0 } : undefined}
       whileInView={reduceMotion ? undefined : { opacity: 1, y: 0 }}
       viewport={VIEWPORT}
       transition={{ duration: reduceMotion ? 0 : 0.5, delay: reduceMotion ? 0 : (index % 5) * 0.08, ease: EASE }}
-      className="w-[78vw] max-w-[280px] shrink-0 snap-center sm:w-[220px]"
+      className="flex w-full min-w-0 flex-col md:flex-1 lg:w-[220px] lg:flex-none lg:shrink-0 lg:snap-center"
     >
       <div
-        className={`group flex h-full flex-col items-center rounded-[20px] border ${theme.border} bg-white p-5 text-center shadow-soft transition-all duration-400 hover:-translate-y-1 hover:shadow-lift`}
+        className={`group flex min-w-0 flex-1 flex-col items-start rounded-[20px] border ${theme.border} bg-white p-5 text-left shadow-soft transition-all duration-400 hover:-translate-y-1 hover:shadow-lift sm:p-6 lg:items-center lg:p-5 lg:text-center`}
       >
-        <span
-          className={`flex h-14 w-14 shrink-0 items-center justify-center rounded-full ${theme.iconBg} ${theme.iconText} transition-shadow duration-300 group-hover:shadow-[0_0_0_6px_rgba(27,143,138,0.08)]`}
-        >
-          <Icon name={step.icon} className="h-6 w-6" strokeWidth={1.7} />
-        </span>
+        <div className="flex items-center gap-3.5 lg:flex-col lg:gap-0">
+          <span
+            className={`flex h-12 w-12 shrink-0 items-center justify-center rounded-full ${theme.iconBg} ${theme.iconText} transition-shadow duration-300 group-hover:shadow-[0_0_0_6px_rgba(27,143,138,0.08)] lg:h-14 lg:w-14`}
+          >
+            <Icon name={step.icon} className="h-6 w-6" strokeWidth={1.7} />
+          </span>
 
-        <span className={`mt-3.5 text-[12px] font-extrabold tracking-[0.14em] ${theme.numberText}`}>
-          {step.step}
-        </span>
-        <h3 className="mt-1 text-[16px] font-extrabold leading-tight text-navy">{step.title}</h3>
-        <p className="mt-2.5 text-[12.5px] leading-relaxed text-navy/55">{step.body}</p>
+          <span className={`text-[13px] font-extrabold tracking-[0.14em] lg:mt-3.5 lg:text-[12px] ${theme.numberText}`}>
+            {step.step}
+          </span>
+        </div>
+        <h3 className="mt-3.5 break-words text-[17px] font-extrabold leading-tight text-navy lg:mt-1 lg:text-[16px]">{step.title}</h3>
+        <p className="mt-2 break-words text-[14px] leading-relaxed text-navy/55 lg:mt-2.5 lg:text-[12.5px]">{step.body}</p>
+
+        {/* Mobile & tablet: outcome sits inside the card as a tap-friendly pill */}
+        <div className="mt-auto max-w-full pt-4 lg:hidden">
+          <span
+            className={`inline-flex min-h-[44px] max-w-full items-center gap-2 rounded-full border px-4 text-[13px] font-bold ${theme.pill}`}
+          >
+            <span className="truncate">{step.outcome}</span>
+            <Icon name="arrow" className="h-3.5 w-3.5 shrink-0" />
+          </span>
+        </div>
 
         <span
           aria-hidden="true"
-          className="mt-4 flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-line text-navy transition-all duration-300 group-hover:translate-x-1 group-hover:border-teal-400/50 group-hover:text-teal-600"
+          className="mt-4 hidden h-10 w-10 shrink-0 items-center justify-center rounded-full border border-line text-navy transition-all duration-300 group-hover:translate-x-1 group-hover:border-teal-400/50 group-hover:text-teal-600 lg:flex"
         >
           <Icon name="arrow" className="h-4 w-4" />
         </span>
       </div>
 
-      <div className="mt-3.5 flex justify-center">
+      <div className="mt-3.5 hidden justify-center lg:flex">
         <span
           className={`rounded-full border px-3.5 py-1 text-[11.5px] font-bold ${theme.pill}`}
         >
@@ -122,9 +133,44 @@ function ProcessCard({ step, index, reduceMotion }) {
   );
 }
 
+function VerticalConnector({ theme, nextTheme, index, reduceMotion }) {
+  return (
+    <div className="flex h-10 items-stretch pl-[44px] sm:pl-[48px] md:hidden" aria-hidden="true">
+      <svg width="12" height="40" viewBox="0 0 12 40" fill="none" className="-translate-x-1/2 overflow-visible">
+        <defs>
+          <linearGradient id={`vc-${index}`} x1="0" y1="0" x2="0" y2="40" gradientUnits="userSpaceOnUse">
+            <stop offset="0" stopColor={theme.line} />
+            <stop offset="1" stopColor={nextTheme.line} />
+          </linearGradient>
+        </defs>
+        <motion.path
+          d="M6 3V33"
+          stroke={`url(#vc-${index})`}
+          strokeOpacity="0.5"
+          strokeWidth="1.6"
+          strokeDasharray="1 5"
+          strokeLinecap="round"
+          initial={reduceMotion ? { opacity: 1 } : { opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: reduceMotion ? 0 : 0.5, ease: 'easeOut' }}
+        />
+        <path
+          d="M2.5 30.5L6 34l3.5-3.5"
+          stroke={nextTheme.line}
+          strokeOpacity="0.6"
+          strokeWidth="1.6"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
+      </svg>
+    </div>
+  );
+}
+
 function Connector({ theme, index, reduceMotion }) {
   return (
-    <div className="hidden shrink-0 items-center self-start pt-[42px] sm:flex sm:w-10 lg:w-12" aria-hidden="true">
+    <div className="hidden shrink-0 items-center self-start pt-[42px] lg:flex lg:w-12" aria-hidden="true">
       <svg width="100%" height="24" viewBox="0 0 48 24" fill="none" preserveAspectRatio="none" className="overflow-visible">
         <motion.path
           d="M2 4C14 4 20 20 46 20"
@@ -158,24 +204,12 @@ function Connector({ theme, index, reduceMotion }) {
 export default function ProcessJourney() {
   const reduceMotion = useReducedMotion();
   const trackRef = useRef(null);
-  const [activeIndex, setActiveIndex] = useState(0);
   const [edge, setEdge] = useState({ start: true, end: false });
   const rafRef = useRef(null);
 
   const measure = useCallback(() => {
     const track = trackRef.current;
     if (!track) return;
-    const cards = track.querySelectorAll('[data-card]');
-    let closest = 0;
-    let minDist = Infinity;
-    cards.forEach((el, i) => {
-      const dist = Math.abs(el.offsetLeft - track.scrollLeft);
-      if (dist < minDist) {
-        minDist = dist;
-        closest = i;
-      }
-    });
-    setActiveIndex(closest);
     setEdge({
       start: track.scrollLeft < 8,
       end: track.scrollLeft + track.clientWidth >= track.scrollWidth - 8,
@@ -202,15 +236,8 @@ export default function ProcessJourney() {
     track.scrollBy({ left: dir * track.clientWidth * 0.82, behavior: reduceMotion ? 'auto' : 'smooth' });
   };
 
-  const scrollToIndex = (i) => {
-    const track = trackRef.current;
-    const card = track?.querySelectorAll('[data-card]')[i];
-    if (!track || !card) return;
-    track.scrollTo({ left: card.offsetLeft - 4, behavior: reduceMotion ? 'auto' : 'smooth' });
-  };
-
   return (
-    <section className="relative overflow-hidden py-16 lg:py-20">
+    <section className="relative overflow-hidden py-12 sm:py-16 lg:py-20">
       <div className="container-x relative">
         <motion.div
           initial={reduceMotion ? { opacity: 1, y: 0 } : { opacity: 0, y: 16 }}
@@ -234,13 +261,13 @@ export default function ProcessJourney() {
           </p>
         </motion.div>
 
-        <div className="relative mt-11 lg:mt-12">
+        <div className="relative mt-9 sm:mt-11 lg:mt-12">
           <button
             type="button"
             onClick={() => scrollByStep(-1)}
             disabled={edge.start}
             aria-label="Scroll to previous steps"
-            className="absolute -left-2 top-[74px] z-10 hidden h-10 w-10 items-center justify-center rounded-full border border-line bg-white text-navy shadow-soft transition-all duration-300 hover:shadow-lift disabled:pointer-events-none disabled:opacity-0 sm:flex lg:-left-4"
+            className="absolute -left-4 top-[74px] z-10 hidden h-10 w-10 items-center justify-center rounded-full border border-line bg-white text-navy shadow-soft transition-all duration-300 hover:shadow-lift disabled:pointer-events-none disabled:opacity-0 lg:flex"
           >
             <Icon name="arrow" className="h-4 w-4 rotate-180" />
           </button>
@@ -249,44 +276,37 @@ export default function ProcessJourney() {
             onClick={() => scrollByStep(1)}
             disabled={edge.end}
             aria-label="Scroll to next steps"
-            className="absolute -right-2 top-[74px] z-10 hidden h-10 w-10 items-center justify-center rounded-full border border-line bg-white text-navy shadow-soft transition-all duration-300 hover:shadow-lift disabled:pointer-events-none disabled:opacity-0 sm:flex lg:-right-4"
+            className="absolute -right-4 top-[74px] z-10 hidden h-10 w-10 items-center justify-center rounded-full border border-line bg-white text-navy shadow-soft transition-all duration-300 hover:shadow-lift disabled:pointer-events-none disabled:opacity-0 lg:flex"
           >
             <Icon name="arrow" className="h-4 w-4" />
           </button>
 
-          <div
+          <ol
             ref={trackRef}
             onScroll={handleScroll}
-            className="scrollbar-hide flex snap-x snap-mandatory items-start gap-0 overflow-x-auto scroll-smooth px-1 pb-3 pt-1 sm:px-8 lg:px-10"
+            className="scrollbar-hide flex flex-col md:grid md:grid-cols-2 md:gap-5 lg:flex lg:snap-x lg:snap-mandatory lg:flex-row lg:items-start lg:gap-0 lg:overflow-x-auto lg:scroll-smooth lg:px-10 lg:pb-3 lg:pt-1"
           >
-            {PROCESS.map((step, i) => (
-              <div key={step.step} className="flex shrink-0 items-start">
-                <ProcessCard step={step} index={i} reduceMotion={reduceMotion} />
-                {i < PROCESS.length - 1 && (
-                  <Connector theme={THEMES[step.theme] || THEMES.teal} index={i} reduceMotion={reduceMotion} />
-                )}
-              </div>
-            ))}
-          </div>
-
-          <div className="mt-5 flex items-center justify-center gap-4 sm:hidden">
-            <span className="text-[12px] font-bold tracking-[0.08em] text-navy/50">
-              {String(activeIndex + 1).padStart(2, '0')} / {String(PROCESS.length).padStart(2, '0')}
-            </span>
-            <div className="flex items-center gap-1.5">
-              {PROCESS.map((step, i) => (
-                <button
-                  key={step.step}
-                  type="button"
-                  onClick={() => scrollToIndex(i)}
-                  aria-label={`Go to step ${step.step}`}
-                  className={`h-1.5 rounded-full transition-all duration-300 ${
-                    i === activeIndex ? 'w-5 bg-teal-600' : 'w-1.5 bg-line'
-                  }`}
-                />
-              ))}
-            </div>
-          </div>
+            {PROCESS.map((step, i) => {
+              const theme = THEMES[step.theme] || THEMES.teal;
+              const next = PROCESS[i + 1];
+              return (
+                <li key={step.step} className="flex min-w-0 flex-col lg:shrink-0 lg:flex-row lg:items-start">
+                  <ProcessCard step={step} index={i} reduceMotion={reduceMotion} />
+                  {next && (
+                    <>
+                      <VerticalConnector
+                        theme={theme}
+                        nextTheme={THEMES[next.theme] || THEMES.teal}
+                        index={i}
+                        reduceMotion={reduceMotion}
+                      />
+                      <Connector theme={theme} index={i} reduceMotion={reduceMotion} />
+                    </>
+                  )}
+                </li>
+              );
+            })}
+          </ol>
         </div>
       </div>
     </section>
