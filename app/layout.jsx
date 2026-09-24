@@ -1,4 +1,5 @@
 import localFont from 'next/font/local';
+import { GoogleAnalytics } from '@next/third-parties/google';
 import './globals.css';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
@@ -117,6 +118,7 @@ export default function RootLayout({ children }) {
         <Footer />
         <WhatsAppFab />
       </body>
+      <GoogleAnalytics gaId="G-V6F4XDT8FB" />
     </html>
   );
 }
