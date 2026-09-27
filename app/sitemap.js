@@ -1,4 +1,4 @@
-import { LOCATIONS, SERVICES } from '@/lib/content';
+import { CASE_STUDIES, LOCATIONS, SERVICES } from '@/lib/content';
 import { getCategories } from '@/lib/digital-products';
 import { TOOLS } from '@/lib/tools';
 
@@ -13,6 +13,7 @@ export default function sitemap() {
     ...routes,
     ...SERVICES.map(({ slug }) => `/services/${slug}`),
     ...LOCATIONS.map(({ slug }) => `/locations/${slug}`),
+    ...CASE_STUDIES.map(({ slug }) => `/case-studies/${slug}`),
     ...getCategories().map(({ slug }) => `/digital-products/${slug}`),
     ...TOOLS.map(({ slug }) => `/tools/${slug}`),
   ].map((r) => ({

@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import Icon from './Icon';
 import Reveal from './Reveal';
 import TrackedLink from './TrackedLink';
@@ -7,6 +8,9 @@ export default function CTA({
   title = 'Let us audit your digital presence — free.',
   body = 'A short call, then a written audit of your social media, website, ads and follow-up process. You keep the audit whether you work with us or not.',
   ctaLabel = 'Book the free audit',
+  // Optional internal link that replaces the default WhatsApp button.
+  secondaryHref,
+  secondaryLabel,
 }) {
   return (
     <section className="py-10 lg:py-14">
@@ -34,17 +38,24 @@ export default function CTA({
                   {ctaLabel}
                   <Icon name="arrow" className="h-4 w-4" />
                 </TrackedLink>
-                <TrackedLink
-                  href={`https://wa.me/${SITE.whatsapp}`}
-                  event="whatsapp_click"
-                  eventParams={{ link_location: 'shared_cta' }}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="btn-ghost-dark"
-                >
-                  <Icon name="wa" className="h-4 w-4" />
-                  Chat on WhatsApp
-                </TrackedLink>
+                {secondaryHref ? (
+                  <Link href={secondaryHref} className="btn-ghost-dark">
+                    {secondaryLabel}
+                    <Icon name="arrow" className="h-4 w-4" />
+                  </Link>
+                ) : (
+                  <TrackedLink
+                    href={`https://wa.me/${SITE.whatsapp}`}
+                    event="whatsapp_click"
+                    eventParams={{ link_location: 'shared_cta' }}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="btn-ghost-dark"
+                  >
+                    <Icon name="wa" className="h-4 w-4" />
+                    Chat on WhatsApp
+                  </TrackedLink>
+                )}
               </div>
             </div>
           </div>
