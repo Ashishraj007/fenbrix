@@ -14,7 +14,6 @@ export function generateMetadata({ params }) {
   if (!study) return {};
 
   const path = `/case-studies/${study.slug}/`;
-  const ogTitle = `${study.metaTitle} | Fenbrix`;
   // Lead with a JPEG crop of the delivered site (WebP previews are unreliable on
   // some social platforms); the Fenbrix brand card is the fallback.
   const { og } = study.images;
@@ -23,14 +22,17 @@ export function generateMetadata({ params }) {
     title: study.metaTitle,
     description: study.metaDescription,
     alternates: { canonical: path },
-    openGraph: { type: 'article', title: ogTitle, description: study.metaDescription, url: path, images },
-    twitter: { card: 'summary_large_image', title: ogTitle, description: study.metaDescription, images: [og.src] },
+    openGraph: { type: 'article', siteName: 'Fenbrix', title: study.ogTitle, description: study.ogDescription, url: path, images },
+    twitter: { card: 'summary_large_image', title: study.ogTitle, description: study.ogDescription, images: [og.src] },
   };
 }
 
 export default function CaseStudyPage({ params }) {
-  const study = CASE_STUDIES.find((item) => item.slug === params.slug);
-  if (!study) notFound();
+  const index = CASE_STUDIES.findIndex((item) => item.slug === params.slug);
+  if (index === -1) notFound();
+  const study = CASE_STUDIES[index];
+  // The following case study (wrapping to the first) — linked at the foot of the page.
+  const next = CASE_STUDIES.length > 1 ? CASE_STUDIES[(index + 1) % CASE_STUDIES.length] : null;
 
   const url = `https://www.fenbrix.in/case-studies/${study.slug}/`;
 
@@ -42,6 +44,7 @@ export default function CaseStudyPage({ params }) {
           headline: study.title,
           description: study.metaDescription,
           url,
+          mainEntityOfPage: { '@type': 'WebPage', '@id': url },
           image: `https://www.fenbrix.in${study.images.og.src}`,
           author: { '@id': 'https://www.fenbrix.in/#organization' },
           publisher: { '@id': 'https://www.fenbrix.in/#organization' },
@@ -53,7 +56,7 @@ export default function CaseStudyPage({ params }) {
           { '@type': 'ListItem', position: 3, name: study.client, item: url },
         ] },
       ] }} />
-      <CaseStudyDetail study={study} />
+      <CaseStudyDetail study={study} next={next} />
     </>
   );
 }

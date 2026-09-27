@@ -44,7 +44,7 @@ export default function CaseStudiesPage() {
           </Reveal>
 
           <div className="mt-11 grid gap-6">
-            {CASE_STUDIES.map((study) => (
+            {CASE_STUDIES.map((study, i) => (
               <Reveal key={study.slug}>
                 <Link
                   href={`/case-studies/${study.slug}/`}
@@ -63,6 +63,9 @@ export default function CaseStudiesPage() {
                   </div>
                   <div className="px-6 pb-7 sm:px-8 lg:py-9 lg:pl-2 lg:pr-10">
                     <div className="flex flex-wrap items-center gap-2">
+                      <span className="mr-1 text-[13px] font-extrabold tracking-[0.1em] text-teal-600">
+                        {String(i + 1).padStart(2, '0')}
+                      </span>
                       <span className="chip">{study.category}</span>
                       <span className="chip">
                         <span className="h-1.5 w-1.5 rounded-full bg-emerald-500" aria-hidden="true" />

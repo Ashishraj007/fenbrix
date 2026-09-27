@@ -52,7 +52,8 @@ function BrowserFrame({ image, domain, eager = false, className = '' }) {
         width={image.width}
         height={image.height}
         loading={eager ? 'eager' : 'lazy'}
-        decoding="async"
+        fetchPriority={eager ? 'high' : undefined}
+        decoding={eager ? undefined : 'async'}
         className="block h-auto w-full"
       />
     </div>
@@ -75,15 +76,13 @@ function PhoneFrame({ image, className = '' }) {
   );
 }
 
-export default function CaseStudyDetail({ study }) {
+export default function CaseStudyDetail({ study, next }) {
   const { images, transformation } = study;
-  const overview = [
-    ['Client', study.client],
-    ['Industry', study.industry],
-    ['Services', study.servicesLong],
-    ['Status', study.status],
-    ['Website', study.domain],
-  ];
+  const { overview } = study;
+  // Services spans a full row on small screens; if the rest leave an odd cell, the last one fills it.
+  const lastSpans = (overview.length - 1) % 2 === 1;
+  const primaryShot = images[study.showcase.primary];
+  const extraShots = study.showcase.extras.map((key) => images[key]);
 
   return (
     <>
@@ -104,19 +103,13 @@ export default function CaseStudyDetail({ study }) {
             </h1>
             <p className="mt-6 max-w-xl text-base leading-relaxed text-white/65 sm:text-lg">{study.intro}</p>
 
-            <dl className="mt-8 grid gap-x-8 gap-y-4 border-t border-white/10 pt-6 sm:grid-cols-[auto_auto_1fr]">
-              <div>
-                <dt className="text-[11px] font-extrabold uppercase tracking-[0.16em] text-white/40">Client</dt>
-                <dd className="mt-1 text-[15px] font-bold text-white">{study.client}</dd>
-              </div>
-              <div>
-                <dt className="text-[11px] font-extrabold uppercase tracking-[0.16em] text-white/40">Industry</dt>
-                <dd className="mt-1 text-[15px] font-bold text-white">Facility Management</dd>
-              </div>
-              <div>
-                <dt className="text-[11px] font-extrabold uppercase tracking-[0.16em] text-white/40">Services</dt>
-                <dd className="mt-1 text-[15px] font-bold text-white">{study.services.join(' • ')}</dd>
-              </div>
+            <dl className="mt-8 flex flex-wrap gap-x-8 gap-y-4 border-t border-white/10 pt-6">
+              {[...study.heroFacts, ['Services', study.services.join(' • ')]].map(([label, value]) => (
+                <div key={label} className={label === 'Services' ? 'min-w-0 flex-1 basis-56' : ''}>
+                  <dt className="text-[11px] font-extrabold uppercase tracking-[0.16em] text-white/40">{label}</dt>
+                  <dd className="mt-1 text-[15px] font-bold text-white">{value}</dd>
+                </div>
+              ))}
             </dl>
 
             <div className="mt-9 flex flex-col gap-3 sm:flex-row">
@@ -140,15 +133,13 @@ export default function CaseStudyDetail({ study }) {
       <section className="pt-14 lg:pt-20">
         <div className="container-x">
           <Reveal>
-            <dl className="grid overflow-hidden rounded-2xl border border-line bg-white shadow-soft sm:grid-cols-2 lg:grid-cols-[1fr_1.2fr_1.9fr_0.8fr_1.2fr]">
+            <dl className="grid grid-cols-2 gap-px overflow-hidden rounded-2xl border border-line bg-line shadow-soft lg:flex">
               {overview.map(([label, value], i) => (
                 <div
                   key={label}
-                  className={`border-line p-5 sm:p-6 ${i > 0 ? 'border-t sm:border-t-0' : ''} ${
-                    i % 2 === 1 ? 'sm:border-l' : ''
-                  } ${i >= 2 ? 'sm:border-t lg:border-t-0' : ''} lg:border-l lg:first:border-l-0 ${
-                    i === 4 ? 'sm:col-span-2 lg:col-span-1' : ''
-                  }`}
+                  className={`bg-white p-5 sm:p-6 ${
+                    label === 'Services' ? 'col-span-2 lg:flex-[1.8]' : 'lg:flex-1'
+                  } ${lastSpans && i === overview.length - 1 ? 'col-span-2' : ''}`}
                 >
                   <dt className="text-[11px] font-extrabold uppercase tracking-[0.16em] text-navy/45">{label}</dt>
                   <dd className="mt-2 text-[15px] font-bold leading-snug text-navy">
@@ -197,11 +188,7 @@ export default function CaseStudyDetail({ study }) {
       {/* ---------- THE FENBRIX APPROACH ---------- */}
       <section className="bg-mist py-20 lg:py-24">
         <div className="container-x">
-          <SectionIntro
-            eyebrow="The Fenbrix approach"
-            title="Five pieces, built as one digital foundation."
-            body="Every part of Noor Facilities’ presence was planned together — so the brand, the website, the content and search all point in the same direction."
-          />
+          <SectionIntro eyebrow="The Fenbrix approach" title={study.approachTitle} body={study.approachBody} />
           <Stagger className="relative mt-11 grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
             {study.approach.map(([title, description, icon], i) => (
               <StaggerItem key={title}>
@@ -227,12 +214,12 @@ export default function CaseStudyDetail({ study }) {
           <SectionIntro
             className="mx-auto max-w-2xl text-center"
             eyebrow="The transformation"
-            title="From no website to a complete digital presence."
+            title={study.transformationTitle}
           />
 
           <div
             role="group"
-            aria-label="Before Fenbrix, Noor Facilities had no website, no established SEO presence and limited visibility. Fenbrix delivered branding, a website, content, SEO and Google presence. After: a professional website, Google indexing, improved visibility and a professional digital identity."
+            aria-label={`Before Fenbrix: ${transformation.before.join(', ')}. Fenbrix delivered: ${transformation.fenbrix.join(', ')}. After: ${transformation.after.join(', ')}.`}
             className="mt-12 grid gap-5 lg:grid-cols-[1fr_auto_1.1fr_auto_1fr] lg:items-stretch lg:gap-4"
           >
             {/* Before */}
@@ -308,7 +295,7 @@ export default function CaseStudyDetail({ study }) {
       {/* ---------- WHAT WE DELIVERED ---------- */}
       <section className="bg-mist py-20 lg:py-24">
         <div className="container-x">
-          <SectionIntro eyebrow="What we delivered" title="Everything needed to be found and trusted online." />
+          <SectionIntro eyebrow={study.deliverablesEyebrow} title={study.deliverablesTitle} />
           <Stagger className="mt-11 grid gap-5 sm:grid-cols-2 lg:grid-cols-5">
             {study.deliverables.map(([title, description, icon]) => (
               <StaggerItem key={title}>
@@ -333,41 +320,51 @@ export default function CaseStudyDetail({ study }) {
             dark
             className="mx-auto max-w-2xl text-center"
             eyebrow="Website showcase"
-            title="The finished website, live today."
-            body="Designed and built by Fenbrix — responsive on every screen, with each service clearly explained."
+            title={study.showcaseTitle}
+            body={study.showcaseBody}
           />
 
           <div className="mt-14 grid items-center gap-10 lg:grid-cols-[2.4fr_1fr] lg:gap-12">
             <Reveal>
-              <BrowserFrame image={images.services} domain={`${study.domain}/services`} />
+              <BrowserFrame image={primaryShot} domain={`${study.domain}${primaryShot.path || ''}`} />
             </Reveal>
             <Reveal delay={0.12} className="mx-auto w-full max-w-[250px] lg:max-w-[260px]">
               <PhoneFrame image={images.mobile} />
             </Reveal>
           </div>
 
-          <Reveal delay={0.1}>
-            <div className="mt-10 grid items-center gap-6 rounded-3xl border border-white/10 bg-white/[0.04] p-6 backdrop-blur-sm sm:grid-cols-[auto_1fr] sm:gap-10 sm:p-8">
-              <div className="flex h-28 items-center justify-center rounded-2xl bg-white px-8 shadow-soft sm:h-32 sm:w-72">
-                <img
-                  src={images.logo.src}
-                  alt={images.logo.alt}
-                  width={images.logo.width}
-                  height={images.logo.height}
-                  loading="lazy"
-                  decoding="async"
-                  className="h-auto max-h-20 w-auto max-w-full"
-                />
-              </div>
-              <div>
-                <span className="text-[11px] font-extrabold uppercase tracking-[0.16em] text-teal-400">Brand identity</span>
-                <h3 className="mt-2 text-xl font-extrabold text-white sm:text-2xl">A logo and identity built for trust.</h3>
-                <p className="mt-2 max-w-xl text-sm leading-relaxed text-white/60">
-                  The Noor Facilities logo and visual identity, created by Fenbrix and carried consistently across the website.
-                </p>
-              </div>
+          {extraShots.length > 0 && (
+            <div className="mt-8 grid gap-8 md:grid-cols-2 lg:mt-10">
+              {extraShots.map((shot, i) => (
+                <Reveal key={shot.src} delay={i * 0.1}>
+                  <BrowserFrame image={shot} domain={`${study.domain}${shot.path || ''}`} />
+                </Reveal>
+              ))}
             </div>
-          </Reveal>
+          )}
+
+          {study.brand && images.logo && (
+            <Reveal delay={0.1}>
+              <div className="mt-10 grid items-center gap-6 rounded-3xl border border-white/10 bg-white/[0.04] p-6 backdrop-blur-sm sm:grid-cols-[auto_1fr] sm:gap-10 sm:p-8">
+                <div className="flex h-28 items-center justify-center rounded-2xl bg-white px-8 shadow-soft sm:h-32 sm:w-72">
+                  <img
+                    src={images.logo.src}
+                    alt={images.logo.alt}
+                    width={images.logo.width}
+                    height={images.logo.height}
+                    loading="lazy"
+                    decoding="async"
+                    className="h-auto max-h-20 w-auto max-w-full"
+                  />
+                </div>
+                <div>
+                  <span className="text-[11px] font-extrabold uppercase tracking-[0.16em] text-teal-400">Brand identity</span>
+                  <h3 className="mt-2 text-xl font-extrabold text-white sm:text-2xl">{study.brand.title}</h3>
+                  <p className="mt-2 max-w-xl text-sm leading-relaxed text-white/60">{study.brand.body}</p>
+                </div>
+              </div>
+            </Reveal>
+          )}
         </div>
       </section>
 
@@ -376,8 +373,8 @@ export default function CaseStudyDetail({ study }) {
         <div className="container-x grid gap-12 lg:grid-cols-2 lg:gap-20">
           <SectionIntro
             eyebrow="Results"
-            title="From no online presence to a live digital brand."
-            body="Noor Facilities now has a professional brand and a live website that search engines can find — the foundation every future marketing effort builds on."
+            title={study.resultsTitle}
+            body={study.resultsBody}
           />
           <Stagger className="grid gap-4 sm:grid-cols-2">
             {study.results.map((result) => (
@@ -394,6 +391,42 @@ export default function CaseStudyDetail({ study }) {
         </div>
       </section>
 
+      {/* ---------- RELATED SERVICES + NEXT CASE STUDY ---------- */}
+      <section className="pb-14 lg:pb-20">
+        <div className="container-x grid gap-6 lg:grid-cols-[1.2fr_1fr]">
+          <Reveal className="rounded-2xl border border-line bg-white p-6 shadow-soft sm:p-7">
+            <span className="eyebrow">Services behind this project</span>
+            <h2 className="mt-3 text-xl font-extrabold leading-snug tracking-[-0.015em] sm:text-2xl">How Fenbrix can help you, too.</h2>
+            <p className="mt-3 text-sm leading-relaxed text-navy/60">{study.related.body}</p>
+            <div className="mt-6 flex flex-wrap gap-3">
+              {study.related.links.map(([label, href]) => (
+                <Link key={href} href={href} className="chip transition-colors hover:border-teal-400 hover:text-teal-600">
+                  {label} <Icon name="arrow" className="h-3.5 w-3.5" />
+                </Link>
+              ))}
+              <Link href="/case-studies/" className="chip transition-colors hover:border-teal-400 hover:text-teal-600">
+                All case studies <Icon name="arrow" className="h-3.5 w-3.5" />
+              </Link>
+            </div>
+          </Reveal>
+
+          {next && (
+            <Reveal delay={0.08}>
+              <Link href={`/case-studies/${next.slug}/`} className="card group flex h-full flex-col">
+                <span className="eyebrow">Next case study</span>
+                <span className="mt-3 text-xl font-extrabold leading-snug tracking-[-0.015em] sm:text-2xl">{next.client}</span>
+                <span className="mt-1 text-sm font-semibold text-teal-600">{next.industry}</span>
+                <span className="mt-3 text-sm leading-relaxed text-navy/60">{next.summary}</span>
+                <span className="mt-auto inline-flex items-center gap-2 pt-6 text-sm font-bold text-navy transition-colors group-hover:text-teal-600">
+                  Read the {next.client} case study
+                  <Icon name="arrow" className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
+                </span>
+              </Link>
+            </Reveal>
+          )}
+        </div>
+      </section>
+
       {/* ---------- LIVE WEBSITE CTA ---------- */}
       <section className="pb-4">
         <div className="container-x">
@@ -402,7 +435,7 @@ export default function CaseStudyDetail({ study }) {
               <div>
                 <span className="eyebrow">{study.domain}</span>
                 <h2 className="h3 mt-3">Explore the {study.client} website</h2>
-                <p className="mt-2 max-w-lg text-sm text-navy/55">See the finished work exactly as their customers do.</p>
+                <p className="mt-2 max-w-lg text-sm text-navy/55">{study.liveCtaBody}</p>
               </div>
               <LiveSiteLink study={study} location="case_study_live_cta" className="btn-primary shrink-0">
                 Visit Live Website <Icon name="arrow" className="h-4 w-4 -rotate-45" />
@@ -413,8 +446,8 @@ export default function CaseStudyDetail({ study }) {
       </section>
 
       <CTA
-        title="Ready to build your digital presence?"
-        body="From branding and websites to SEO and digital growth, Fenbrix helps businesses build a stronger online presence."
+        title={study.cta.title}
+        body={study.cta.body}
         ctaLabel="Start a Project"
         secondaryHref="/services/"
         secondaryLabel="Explore Services"
