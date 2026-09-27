@@ -61,7 +61,7 @@ Open **`lib/content.js`** and replace the placeholder contact details at the top
 ```js
 export const SITE = {
   phone: '+91 00000 00000',      // ← your real phone number
-  email: 'hello@fenbrix.com',    // ← your real email
+  email: 'ashish@fenbrix.in',   // ← your real email
   whatsapp: '910000000000',      // ← country code + number, digits only, no +
 };
 ```

@@ -81,96 +81,92 @@ function FounderConnect({ person }) {
   );
 }
 
-// Leadership portrait in a rounded frame with a soft teal glow. Positioned
-// from the top so the face is never cropped.
+// Team portrait in a rounded frame with a soft teal glow. Same frame on every
+// card; positioned from the top so the face is never cropped.
 function Portrait({ person }) {
   return (
-    <div className="relative w-full max-w-[240px] shrink-0 sm:w-[40%] sm:max-w-[260px]">
-      <div className="relative aspect-[9/10] overflow-hidden rounded-[22px] sm:aspect-[4/5] border border-teal-300/50 bg-navy-800 shadow-[0_0_34px_-6px_rgba(53,214,192,0.45)]">
-        <img
-          src={person.image}
-          alt={`${person.name}, ${person.title} at Fenbrix`}
-          loading="lazy"
-          decoding="async"
-          className="h-full w-full object-cover object-[50%_20%]"
+    <div className="relative mt-4 aspect-[4/3] overflow-hidden rounded-[20px] border border-teal-300/40 bg-navy-800 shadow-[0_0_30px_-8px_rgba(53,214,192,0.45)]">
+      <img
+        src={person.image}
+        alt={`${person.name}, ${person.title} at Fenbrix`}
+        loading="lazy"
+        decoding="async"
+        className="h-full w-full object-cover object-[50%_22%]"
+      />
+      {person.portraitTint && (
+        // Cool teal tone over a studio-white backdrop so it sits in the dark theme.
+        <span
+          className="pointer-events-none absolute inset-0 bg-gradient-to-b from-[#d9eeef] via-[#c9e0e4] to-[#a9c4cd] mix-blend-multiply"
+          aria-hidden="true"
         />
-        {person.portraitTint && (
-          // Cool teal tone over a studio-white backdrop so it sits in the dark theme.
-          <span
-            className="pointer-events-none absolute inset-0 bg-gradient-to-b from-[#d9eeef] via-[#c9e0e4] to-[#a9c4cd] mix-blend-multiply"
-            aria-hidden="true"
-          />
-        )}
-        <span className="pointer-events-none absolute inset-0 rounded-[22px] ring-1 ring-inset ring-white/10" aria-hidden="true" />
-      </div>
+      )}
+      <span className="pointer-events-none absolute inset-0 rounded-[20px] ring-1 ring-inset ring-white/10" aria-hidden="true" />
     </div>
   );
 }
 
-// Leadership profile card: role pill on top, portrait beside the details
-// (stacked on phones). Cards stretch to equal height in the row.
+// Compact vertical team card: role pill, portrait, identity, experience and
+// tags, with the description pinned to the bottom so cards in a row align.
 function ProfileCard({ person }) {
   return (
     <article className="relative h-full">
-      <div className="pointer-events-none absolute -left-8 -top-8 h-48 w-48 rounded-full bg-teal-400/15 blur-3xl" aria-hidden="true" />
+      <div className="pointer-events-none absolute -left-8 -top-8 h-40 w-40 rounded-full bg-teal-400/10 blur-3xl" aria-hidden="true" />
 
-      <div className="relative flex h-full flex-col overflow-hidden rounded-[28px] border border-teal-400/25 bg-gradient-to-br from-white/[0.07] via-white/[0.03] to-blue-500/[0.14] p-5 shadow-lift backdrop-blur-xl sm:p-7">
+      <div className="relative flex h-full flex-col overflow-hidden rounded-[24px] border border-teal-400/25 bg-gradient-to-br from-white/[0.07] via-white/[0.03] to-blue-500/[0.14] p-5 shadow-lift backdrop-blur-xl xl:p-6">
         <span
-          className="pointer-events-none absolute inset-0 bg-[radial-gradient(120%_80%_at_0%_0%,rgba(53,214,192,0.12),transparent_55%)]"
+          className="pointer-events-none absolute inset-0 bg-[radial-gradient(120%_70%_at_0%_0%,rgba(53,214,192,0.12),transparent_55%)]"
           aria-hidden="true"
         />
 
-        <p className="relative max-w-full self-start rounded-2xl border border-teal-400/40 bg-navy-900/40 px-4 py-1.5 text-[11px] font-extrabold uppercase tracking-[0.14em] text-teal-400 min-[360px]:rounded-full sm:text-[12px]">
+        <p className="relative max-w-full self-start rounded-2xl border border-teal-400/40 bg-navy-900/40 px-3.5 py-1.5 text-[10.5px] font-extrabold uppercase tracking-[0.12em] text-teal-400 min-[360px]:rounded-full">
           {person.role || person.title}
         </p>
 
-        <div className="relative mt-6 flex flex-1 flex-col gap-6 sm:flex-row sm:items-start sm:gap-7">
-          {person.image && <Portrait person={person} />}
+        {person.image && <Portrait person={person} />}
 
-          <div className="min-w-0 flex-1">
-            <LogoMark className="h-11 w-11 rounded-xl shadow-soft" variant="gradient" id={`fx-${person.name.replace(/\W+/g, '')}`} />
-            <h3 className="mt-4 text-[1.75rem] font-extrabold leading-tight text-white lg:text-[1.6rem] xl:text-[1.75rem]">{person.name}</h3>
-            <p className="mt-1 text-[16px] font-semibold leading-snug text-teal-400 sm:text-[17px]">{person.role || person.title}</p>
-
-            {person.focus?.length > 0 && (
-              <ul className="mt-4 flex flex-wrap gap-2" aria-label="Focus areas">
-                {person.focus.map((f) => (
-                  <li
-                    key={f}
-                    className="rounded-full border border-white/15 bg-white/[0.06] px-3.5 py-1.5 text-[13px] font-semibold text-white/85 lg:px-3 lg:text-[12.5px]"
-                  >
-                    {f}
-                  </li>
-                ))}
-              </ul>
-            )}
-
-            {person.location && (
-              <p className="mt-4 flex items-center gap-2 text-[14px] text-white/70">
-                <Icon name="pin" className="h-4 w-4 shrink-0 text-teal-400" strokeWidth={2} />
-                Based in {person.location}
-              </p>
-            )}
-
-            {person.highlight && (
-              <p className="mt-4 inline-flex max-w-full items-center gap-2.5 rounded-2xl border border-teal-400/35 bg-teal-400/10 py-1.5 pl-1.5 pr-3.5 text-[12.5px] font-semibold leading-snug text-white">
-                <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-teal-400 to-teal-600 text-navy-900">
-                  <Icon name="brief" className="h-3.5 w-3.5" strokeWidth={2} />
-                </span>
-                {person.highlight}
-              </p>
-            )}
-
-            {person.description && (
-              <p
-                className={`text-[14px] leading-relaxed text-white/70 ${
-                  person.highlight ? 'mt-4' : 'mt-5 border-t border-white/10 pt-5'
-                }`}
-              >
-                {person.description}
-              </p>
-            )}
+        <div className="relative mt-5 flex items-center gap-3">
+          <LogoMark className="h-10 w-10 shrink-0 rounded-xl shadow-soft" variant="gradient" id={`fx-${person.name.replace(/\W+/g, '')}`} />
+          <div className="min-w-0">
+            <h3 className="text-[1.35rem] font-extrabold leading-tight text-white xl:text-2xl">{person.name}</h3>
+            <p className="mt-0.5 text-[14px] font-semibold leading-snug text-teal-400">{person.role || person.title}</p>
           </div>
+        </div>
+
+        <div className="relative flex flex-1 flex-col">
+          {person.highlight && (
+            <p className="mt-4 inline-flex max-w-full items-center gap-2 self-start rounded-2xl border border-teal-400/35 bg-teal-400/10 py-1 pl-1 pr-3 text-[12.5px] font-semibold leading-snug text-white">
+              <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-teal-400 to-teal-600 text-navy-900">
+                <Icon name="brief" className="h-3.5 w-3.5" strokeWidth={2} />
+              </span>
+              {person.highlight}
+            </p>
+          )}
+
+          {person.focus?.length > 0 && (
+            <ul className="mt-4 flex flex-wrap gap-1.5" aria-label="Focus areas">
+              {person.focus.map((f) => (
+                <li
+                  key={f}
+                  className="rounded-full border border-white/15 bg-white/[0.06] px-2.5 py-1 text-[12px] font-semibold text-white/85"
+                >
+                  {f}
+                </li>
+              ))}
+            </ul>
+          )}
+
+          {person.location && (
+            <p className="mt-3 flex items-center gap-2 text-[13px] text-white/70">
+              <Icon name="pin" className="h-4 w-4 shrink-0 text-teal-400" strokeWidth={2} />
+              Based in {person.location}
+            </p>
+          )}
+
+          {person.description && (
+            <div className="mt-auto pt-4">
+              <p className="border-t border-white/10 pt-4 text-[13.5px] leading-relaxed text-white/70">{person.description}</p>
+            </div>
+          )}
         </div>
       </div>
     </article>
@@ -179,8 +175,9 @@ function ProfileCard({ person }) {
 
 export default function Founders({ people = FOUNDERS }) {
   // The first person leads the section: headline, story and expertise are
-  // theirs. Everyone (founder first) gets a profile card in the leadership row.
+  // theirs. Everyone (founder first) gets a card in the team row.
   const [founder] = people;
+  const oddCount = people.length % 2 === 1;
   const [lead, highlight] = founder.tagline || [founder.name, ''];
 
   return (
@@ -213,17 +210,25 @@ export default function Founders({ people = FOUNDERS }) {
           )}
         </Reveal>
 
-        {/* ---- Leadership row ---- */}
-        <div className="mt-10 grid gap-6 lg:mt-12 lg:grid-cols-2 lg:gap-8">
+        {/* ---- Team row: 3 across on desktop; 2 + a centred last card on tablet ---- */}
+        <div className="mt-10 grid gap-6 md:grid-cols-2 lg:mt-12 lg:grid-cols-3 lg:gap-5 xl:gap-6">
           {people.map((person, i) => (
-            <Reveal key={person.name} delay={i * 0.12} className="h-full">
+            <Reveal
+              key={person.name}
+              delay={i * 0.1}
+              className={`h-full ${
+                oddCount && i === people.length - 1
+                  ? 'md:col-span-2 md:mx-auto md:w-[calc(50%-0.75rem)] lg:col-span-1 lg:mx-0 lg:w-auto'
+                  : ''
+              }`}
+            >
               <ProfileCard person={person} />
             </Reveal>
           ))}
         </div>
 
         {/* ---- Vision, then experience ---- */}
-        <div className="mt-14 grid items-start gap-8 lg:mt-20 lg:grid-cols-2 lg:gap-14 xl:gap-16">
+        <div className="mt-14 grid items-start gap-8 lg:mt-16 lg:grid-cols-2 lg:gap-14 xl:gap-16">
           <Reveal direction="right">
             {(founder.intro || founder.bio?.length > 0) && (
               <div className="flex items-center gap-2">
