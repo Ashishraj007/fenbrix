@@ -365,6 +365,30 @@ export default function CaseStudyDetail({ study, next }) {
               </div>
             </Reveal>
           )}
+
+          {/* Build credit, as it appears on the client's live site. */}
+          {study.credit && images.credit && (
+            <Reveal delay={0.1}>
+              <figure className="mt-10 grid items-center gap-6 rounded-3xl border border-white/10 bg-white/[0.04] p-6 backdrop-blur-sm sm:p-8 lg:grid-cols-[1fr_auto] lg:gap-10">
+                <figcaption>
+                  <span className="text-[11px] font-extrabold uppercase tracking-[0.16em] text-teal-400">Build credit</span>
+                  <h3 className="mt-2 text-xl font-extrabold text-white sm:text-2xl">{study.credit.title}</h3>
+                  <p className="mt-2 max-w-xl text-sm leading-relaxed text-white/60">{study.credit.body}</p>
+                </figcaption>
+                <div className="w-full max-w-[440px] overflow-hidden rounded-xl border border-white/10 shadow-soft">
+                  <img
+                    src={images.credit.src}
+                    alt={images.credit.alt}
+                    width={images.credit.width}
+                    height={images.credit.height}
+                    loading="lazy"
+                    decoding="async"
+                    className="block h-auto w-full"
+                  />
+                </div>
+              </figure>
+            </Reveal>
+          )}
         </div>
       </section>
 
