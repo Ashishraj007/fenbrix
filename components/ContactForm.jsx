@@ -52,7 +52,7 @@ export default function ContactForm() {
   const sendEmail = () => {
     if (!valid) return;
     window.location.href =
-      `mailto:${SITE.email}?subject=${encodeURIComponent('Website enquiry — ' + (form.business || form.name))}` +
+      `mailto:${SITE.salesEmail}?subject=${encodeURIComponent('Website enquiry — ' + (form.business || form.name))}` +
       `&body=${encodeURIComponent(summary())}`;
     setSent(true);
     trackEvent('contact_form_submit', { method: 'email', service: form.service || undefined });
