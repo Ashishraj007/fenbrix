@@ -211,7 +211,7 @@ export default function Founders({ people = FOUNDERS }) {
         </Reveal>
 
         {/* ---- Team row: 3 across on desktop; 2 + a centred last card on tablet ---- */}
-        <div className="mt-10 grid gap-6 md:grid-cols-2 lg:mt-12 lg:grid-cols-3 lg:gap-5 xl:gap-6">
+        <div className="mt-6 grid gap-8 md:grid-cols-2 lg:mt-12 lg:grid-cols-2 lg:gap-5 xl:gap-6">
           {people.map((person, i) => (
             <Reveal
               key={person.name}
