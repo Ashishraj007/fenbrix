@@ -226,7 +226,7 @@ export default function Hero() {
 
       <div className="container-x relative z-10 grid items-center gap-14 py-20 lg:grid-cols-[1.08fr_1fr] lg:gap-10 lg:py-28">
         <div>
-          <motion.span
+          {/* <motion.span
             initial={{ opacity: 0, y: 14 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
@@ -235,7 +235,7 @@ export default function Hero() {
           >
             <span className="h-1.5 w-1.5 rounded-full bg-teal-400" />
             Noida · Delhi NCR
-          </motion.span>
+          </motion.span> */}
 
           <motion.h1
             initial={{ opacity: 0, y: 22 }}
