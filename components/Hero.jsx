@@ -217,7 +217,6 @@ function OrbitDiagram() {
 export default function Hero() {
   return (
     <section className="surface-dark relative overflow-hidden">
-      {/* floating blobs */}
       <div className="pointer-events-none absolute -left-24 top-16 h-72 w-72 animate-float rounded-full bg-teal-400/10 blur-3xl" />
       <div
         className="pointer-events-none absolute -right-20 bottom-0 h-80 w-80 animate-float rounded-full bg-teal-600/15 blur-3xl"
